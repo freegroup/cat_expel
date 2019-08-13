@@ -26,11 +26,14 @@ def draw_prediction(img, prediction):
 
 
 print('Reading from webcam.')
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 
 while True:
     # Capture frame-by-frame
+    cap = cv2.VideoCapture(0)
     ret, image = cap.read()
+    cap.release()
+    #ret, image = cap.read()
 
     predictions = predict(image, predict_ids.TEDDY_BEAR)
     for p in predictions:
