@@ -30,12 +30,13 @@ print('Reading from webcam.')
 
 while True:
     # Capture frame-by-frame
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     ret, image = cap.read()
     cap.release()
-    #ret, image = cap.read()
 
-    predictions = predict(image, predict_ids.TEDDY_BEAR)
+    image = cv2.flip( image, 0 )
+
+    predictions = predict(image, predict_ids.CAT)
     for p in predictions:
         draw_prediction(image, p)
 
