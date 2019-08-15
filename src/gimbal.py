@@ -9,18 +9,10 @@ class Gimbal:
     def __init__(self):
         pass
 
-    def left(self):
-        print("left")
+    def x_rotate(self, amount):
+        print("x_rot", amount)
         pass
 
-    def right(self):
-        print("right")
-        pass
-
-    def up(self):
-        print("up")
-        pass
-
-    def down(self):
-        print("soqn")
+    def y_rotate(self, amount):
+        print("y_rot", amount)
         pass
