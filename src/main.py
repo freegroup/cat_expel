@@ -28,13 +28,14 @@ def draw_prediction(img, prediction):
 print('Reading from webcam.')
 #cap = cv2.VideoCapture(0)
 
+index =0
 while True:
     # Capture frame-by-frame
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(index)
     ret, image = cap.read()
     cap.release()
 
-    image = cv2.flip( image, 0 )
+    #image = cv2.flip( image, 0 )
 
     predictions = predict(image, predict_ids.CAT)
     for p in predictions:
@@ -43,5 +44,6 @@ while True:
     cv2.imshow("object detection", image)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    index = (index+1)%2
 
 cv2.destroyAllWindows()
