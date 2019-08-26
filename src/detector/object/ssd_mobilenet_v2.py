@@ -1,7 +1,7 @@
 import cv2
 import os
 import zipfile
-from detector.prediction import Prediction, Box
+from detector.object.prediction import Prediction, Box
 from enum import Enum
 
 CWD_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -46,6 +46,7 @@ class predict_ids(Enum):
     PERSON = 1
     TEDDY_BEAR= 88
     CAT = 17
+    DOG = 18
 
 
 # Loading model

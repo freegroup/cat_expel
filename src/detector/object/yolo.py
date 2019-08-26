@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 from util import download_file
-from detector.prediction import Prediction, Box
+from detector.object.prediction import Prediction, Box
 from enum import Enum
 
 CWD_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -36,6 +36,7 @@ class predict_ids(Enum):
   PERSON =0
   TEDDY_BEAR=77
   CAT = 15
+  DOG = 16
 
 
 def predict(image, class_to_detect):

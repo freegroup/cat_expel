@@ -3,6 +3,8 @@ import slack
 import threading
 import signal
 import time
+import sys
+import cv2
 
 from file.configuration import Configuration
 
@@ -17,6 +19,7 @@ class Sender:
         self.thread.start()            # Start the execution
         self.interval_seconds = interval_seconds
         self.current_message = "msg"
+        self.current_image = None
         self.last_message_sent = time.time()-interval_seconds
 
     def __del__(self):
@@ -24,6 +27,12 @@ class Sender:
 
     def post_message(self, message, image=None):
         self.current_message = message
+
+        if image is not None:
+            self.current_image = image.copy()
+        else:
+            self.current_image = None
+
         self.sync_event.set()
 
     # Keep watching in a loop
@@ -43,10 +52,18 @@ class Sender:
 
                 client = slack.WebClient(token=conf.get("api_token", section="slack"))
 
-                response = client.chat_postMessage(
-                    channel='#allgemein',
-                    text=self.current_message)
-                assert response["ok"]
+                if self.current_image is not None:
+                    cv2.imwrite("test.png", self.current_image)
+                    client.files_upload(
+                        channels="#allgemein",
+                        file="test.png",
+                        title=self.current_message
+                    )
+                else:
+                    client.chat_postMessage(
+                        channel='#allgemein',
+                        text=self.current_message)
+
                 self.sync_event.clear()
                 self.last_message_sent = time.time()
 
