@@ -33,9 +33,8 @@ while True:
     cap = cv2.VideoCapture(0)
     ret, image = cap.read()
     cap.release()
-    #ret, image = cap.read()
 
-    predictions = predict(image, predict_ids.TEDDY_BEAR)
+    predictions = predict(image, predict_ids.CAT)
     for p in predictions:
         draw_prediction(image, p)
 
