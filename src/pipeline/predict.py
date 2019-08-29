@@ -11,13 +11,15 @@ from detector.object.ssd_mobilenet_v2 import predict, predict_ids
 
 class ObjectDetector:
 
-    def __init__(self, image_provider):
-        self.__detected_image = None
-        self.__debug_image = None
-        self.image_provider = image_provider
+    def __init__(self, queue_input, queue_output, queue_debug):
+
+        self.queue_input = queue_input
+        self.queue_output = queue_output
+        self.queue_debug = queue_debug
+
+        self.debug = True
 
         self.run_thread = True
-        self.sync_event = threading.Event()
         self.thread = threading.Thread(target=self.__run, args=())
         self.thread.daemon = True      # Daemonized thread
         self.thread.start()            # Start the execution
@@ -25,29 +27,20 @@ class ObjectDetector:
     def __del__(self):
         self.run_thread = False
 
-    def detected_image(self):
-        return self.__detected_image
-
-    def debug_image(self):
-        return self.__debug_image
-
     # Keep watching in a loop
     def __run(self):
         while self.run_thread:
             try:
-                image = self.image_provider.forwarding_image()
-                if image is None:
-                    time.sleep(0.1)
-                    continue
+                image, meta = self.queue_input.get()
 
-                image = image.copy()
-                predictions = predict(image, predict_ids.PERSON)
-                if len(predictions) > 0:
-                    self.__detected_image = image
+                predictions = predict(image, predict_ids.DOG, 0.1)
+                #if len(predictions) > 0:
+
+                if self.debug:
                     tmp = image.copy()
                     for p in predictions:
                         self.draw_prediction(tmp, p)
-                    self.__debug_image = tmp
+                    self.queue_debug.put((tmp, None))
 
             except:
                 self.run_thread = False

@@ -39,7 +39,7 @@ class predict_ids(Enum):
   DOG = 16
 
 
-def predict(image, class_to_detect):
+def predict(image, class_to_detect, confidence):
     scale = 0.00392
     image_height, image_width, _ = image.shape
     blob = cv2.dnn.blobFromImage(image, scale, (416, 416), (0, 0, 0), True, crop=False)
@@ -60,8 +60,8 @@ def predict(image, class_to_detect):
         for detection in out:
             scores = detection[5:]
             class_id = np.argmax(scores)
-            confidence = scores[class_id]
-            if confidence > 0.5 and class_id == class_to_detect.value:
+            conf = scores[class_id]
+            if conf > confidence and class_id == class_to_detect.value:
                 center_x = int(detection[0] * image_width)
                 center_y = int(detection[1] * image_height)
                 w = int(detection[2] * image_width)
