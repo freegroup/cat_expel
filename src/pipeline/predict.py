@@ -17,7 +17,7 @@ class ObjectDetector:
         self.queue_output = queue_output
         self.queue_debug = queue_debug
 
-        self.debug = True
+        self.debug = False
 
         self.run_thread = True
         self.thread = threading.Thread(target=self.__run, args=())
@@ -33,13 +33,18 @@ class ObjectDetector:
             try:
                 image, meta = self.queue_input.get()
 
-                predictions = predict(image, predict_ids.DOG, 0.1)
-                #if len(predictions) > 0:
+                # drop frames if we can't process them fast enough
+                self.drop_frames()
+
+                predictions = predict(image, predict_ids.PERSON, 0.1)
+                tmp = image.copy()
+                for p in predictions:
+                    self.draw_prediction(tmp, p)
+
+                if len(predictions) > 0:
+                    self.queue_output.put((tmp, predictions))
 
                 if self.debug:
-                    tmp = image.copy()
-                    for p in predictions:
-                        self.draw_prediction(tmp, p)
                     self.queue_debug.put((tmp, None))
 
             except:
@@ -69,3 +74,11 @@ class ObjectDetector:
     #    elif center_normalized[1] < -0.05:
     #        cv2.arrowedLine(image, image_center, (image_center[0], image_center[1]+100), color,2 )
 
+
+    def drop_frames(self):
+        # drop images if we can't process them fast enough
+        try:
+            while True:
+                self.queue_input.get_nowait()
+        except:
+            pass

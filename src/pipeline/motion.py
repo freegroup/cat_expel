@@ -31,7 +31,7 @@ class MotionDetector:
         self.queue_output = queue_output
         self.queue_debug = queue_debug
 
-        self.debug = False
+        self.debug = True
 
         self.run_thread = True
         self.thread = threading.Thread(target=self.__run, args=())
@@ -46,6 +46,10 @@ class MotionDetector:
         while self.run_thread:
             try:
                 image, meta = self.queue_input.get()
+
+                # drop images if we can't process them fast enough
+                self.drop_frames()
+
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 blur = cv2.GaussianBlur(gray, (15, 15), 0)
 
@@ -110,3 +114,11 @@ class MotionDetector:
                 break
 
         return boxes
+
+    def drop_frames(self):
+        # drop images if we can't process them fast enough
+        try:
+            while True:
+                self.queue_input.get_nowait()
+        except:
+            pass
