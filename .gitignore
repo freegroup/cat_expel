@@ -1,2 +1,3 @@
-src/model/ssd_mobilenet_v2_coco_2018_03_29/frozen_inference_graph.pb
-src/model/ssd_mobilenet_v2_coco_2018_03_29/graph.pbtxt
+src/detector/object/model/ssd_mobilenet_v2_coco_2018_03_29/
+__pycache__
+config/service.ini
