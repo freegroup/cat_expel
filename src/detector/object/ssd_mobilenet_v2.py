@@ -1,7 +1,7 @@
 import cv2
 import os
 import zipfile
-from detector.prediction import Prediction, Box
+from detector.object.prediction import Prediction, Box
 from enum import Enum
 
 CWD_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -46,6 +46,7 @@ class predict_ids(Enum):
     PERSON = 1
     TEDDY_BEAR= 88
     CAT = 17
+    DOG = 18
 
 
 # Loading model
@@ -53,7 +54,7 @@ print('Loading Model.')
 model = cv2.dnn.readNetFromTensorflow(PATH_TO_CKPT, PATH_TO_PBTXT)
 
 
-def predict(image, class_to_detect):
+def predict(image, class_to_detect, confidence):
     image_height, image_width, _ = image.shape
     blob = cv2.dnn.blobFromImage(image, size=(300,300), swapRB=True)
     model.setInput(blob)
@@ -61,9 +62,9 @@ def predict(image, class_to_detect):
 
     predictions = []
     for detection in output[0, 0, :, :]:
-        confidence = detection[2]
+        conf = detection[2]
         class_id = detection[1]
-        if confidence > .2 and class_id == class_to_detect.value:
+        if conf > confidence and class_id == class_to_detect.value:
             box_x = int(detection[3] * image_width)
             box_y = int(detection[4] * image_height)
             box_width = int(detection[5] * image_width)
