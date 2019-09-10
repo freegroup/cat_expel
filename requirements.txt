@@ -3,3 +3,4 @@ opencv-python==4.1.0.25
 six==1.12.0
 tqdm==4.32.2
 slackclient==2.1.0
+imageio==2.5.0
