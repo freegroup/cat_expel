@@ -1,60 +1,64 @@
 import os
 import slack
-import threading
 import signal
 import time
 import sys
 import cv2
+import queue
+import traceback
+import imageio
 
 from file.configuration import Configuration
 
 conf = Configuration(inifile="config/service.ini", reload_on_change=True)
 
-class Sender:
-    def __init__(self, queue_input, queue_output, queue_debug):
-        self.queue_input = queue_input
-        self.queue_output = queue_output
-        self.queue_debug = queue_debug
 
-        self.debug = False
+interval_seconds = conf.get_int("interval_seconds", section="slack")
+last_message_sent = time.time()-interval_seconds
 
-        self.interval_seconds = conf.get_int("interval_seconds", section="slack")
-        self.last_message_sent = time.time()-self.interval_seconds
+# Keep watching in a loop
+def slack_send(context):
+    global interval_seconds
+    global last_message_sent
+    try:
+        image = context.current_frame
+        width, height, channels = image.shape
+        # send only one message per "interval_seconds". Sleep for a while (message lost is possible)
+        diff = (time.time() - last_message_sent)-interval_seconds
+        if diff < 0:
+            return False
 
-        self.run_thread = True
-        self.thread = threading.Thread(target=self.__run, args=())
-        self.thread.daemon = True      # Daemonized thread
-        self.thread.start()            # Start the execution
-
-
-    def __del__(self):
-        self.run_thread = False
-
-    # Keep watching in a loop
-    def __run(self):
-        while self.run_thread:
+        with imageio.get_writer('output.gif', mode='I') as writer:
             try:
-                image, meta = self.queue_input.get()
-                # send only one message per "interval_seconds". Sleep for a while (message lost is possible)
-                diff = (time.time() - self.last_message_sent)-self.interval_seconds
-                if diff < 0:
-                    continue
-
-                cv2.imwrite("test.png", image)
-                client = slack.WebClient(token=conf.get("api_token", section="slack"))
-                client.files_upload(
-                    channels="#allgemein",
-                    file="test.png",
-                    title="Target detected"
-                )
-                if self.debug:
-                    self.queue_debug.put((image, None))
-
-                self.last_message_sent = time.time()
+                last_frames = context.last_frames
+                while True:
+                    frame = last_frames.get_nowait()
+                    scale_percent = 30 # percent of original size
+                    width = int(frame.shape[1] * scale_percent / 100)
+                    height = int(frame.shape[0] * scale_percent / 100)
+                    dim = (width, height)
+                    resized = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+                    resized = cv2.cvtColor(resized,cv2.COLOR_BGR2RGB)
+                    writer.append_data(resized)
+            except queue.Empty:
+                pass
             except:
-                print('Unhandled error: {}'.format( sys.exc_info()[1]), file=sys.stderr)
-                self.run_thread = False
-                # because we are running within a thread, a normal "sys.exit(1)" didn't work. Process didn't terminate.
-                # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
-                # SIGTERM event from outside.
-                os.kill(os.getpid(), signal.SIGTERM)
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2, file=sys.stdout)
+                pass
+
+        client = slack.WebClient(token=conf.get("api_token", section="slack"))
+        client.files_upload(
+            channels="#allgemein",
+            file="output.gif",
+            title="Target detected"
+        )
+
+        last_message_sent = time.time()
+        return True
+    except:
+        print('Unhandled error: {}'.format( sys.exc_info()[1]), file=sys.stderr)
+        # because we are running within a thread, a normal "sys.exit(1)" didn't work. Process didn't terminate.
+        # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
+        # SIGTERM event from outside.
+        os.kill(os.getpid(), signal.SIGTERM)
