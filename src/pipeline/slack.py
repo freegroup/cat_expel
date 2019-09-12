@@ -64,22 +64,22 @@ def slack_send(context):
 # Keep watching in a loop
 def run():
     global upload_queue
+    client = slack.WebClient(token=conf.get("api_token", section="slack"))
     while True:
         try:
             filename = upload_queue.get()
-            client = slack.WebClient(token=conf.get("api_token", section="slack"))
             client.files_upload(
                 channels="#allgemein",
                 file=filename,
                 title="Target detected"
             )
             os.remove(filename)
-        except:
+        except Exception as exc:
             # because we are running within a thread, a normal "sys.exit(1)" didn't work. Process didn't terminate.
             # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
             # SIGTERM event from outside.
-            print('Unhandled error: {}'.format( sys.exc_info()[1]), file=sys.stderr)
-            os.kill(os.getpid(), signal.SIGTERM)
+            print(exc)
+            print('Unhandled error: {}'.format( sys.exc_info()[1]))
 
 
 thread = threading.Thread(target=run, args=())

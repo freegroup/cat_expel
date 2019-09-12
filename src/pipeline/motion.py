@@ -5,9 +5,9 @@ import cv2
 import numpy as np
 import itertools
 import traceback
+import imutils
 
 __last_frame = None
-__debug = False
 
 def union(a,b):
     x = min(a[0], b[0])
@@ -51,11 +51,10 @@ def combine(boxes):
 
 
 # Keep watching in a loop
-def detect_motion(context):
+def detect_motion(context, debug=False):
     image = context.current_frame
 
     global __last_frame
-    global __debug
 
     try:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -63,7 +62,7 @@ def detect_motion(context):
 
         if __last_frame is None:
             __last_frame = blur
-            return None
+            return [], __last_frame
 
         delta = cv2.absdiff(__last_frame, blur)
 
@@ -73,6 +72,7 @@ def detect_motion(context):
         delta = cv2.dilate(delta, kernel, iterations=3)
 
         cnts, _ = cv2.findContours(delta, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
         boxes = []
         for c in cnts:
             if cv2.contourArea(c) < 500:
@@ -82,16 +82,17 @@ def detect_motion(context):
         __last_frame = blur
         boxes = combine(boxes)
 
-        if __debug:
+        dbg = blur
+        if debug:
             dbg = blur.copy()
             for obj in boxes:
                 x, y, w, h = obj
                 cv2.rectangle(dbg, (x, y), (x + w, y + h), (255, 0, 0), 1)
-            context.debug_frame = dbg
+
         if len(boxes) > 0:
-            return boxes
+            return boxes, dbg
         else:
-            return None
+            return [], dbg
 
     except:
         exc_type, exc_value, exc_traceback = sys.exc_info()

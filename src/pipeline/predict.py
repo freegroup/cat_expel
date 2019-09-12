@@ -7,26 +7,24 @@ import traceback
 #from detector.object.yolo import predict, predict_ids
 from detector.object.ssd_mobilenet_v2 import predict, predict_ids
 
-__debug = True
-
 
 # Keep watching in a loop
-def detect_object(context):
-    global __debug
+def detect_object(context, debug=False):
 
     try:
         image = context.current_frame
 
         predictions = predict(image, predict_ids.PERSON, 0.1)
-        tmp = image.copy()
-        for p in predictions:
-            draw_prediction(tmp, p)
-
-        if __debug:
-            context.debug_frame = tmp
+        dbg = image
+        if debug:
+            dbg = image.copy()
+            for p in predictions:
+                draw_prediction(dbg, p)
 
         if len(predictions) > 0:
-            return predictions
+            return predictions, dbg
+        else:
+            return None, dbg
 
     except:
         exc_type, exc_value, exc_traceback = sys.exc_info()
