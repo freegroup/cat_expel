@@ -41,7 +41,7 @@ class predict_ids(Enum):
 
 def predict(image, class_to_detect, confidence):
     scale = 0.00392
-    image_height, image_width, _ = image.shape
+    image_height, image_width,  = image.shape[:2]
     blob = cv2.dnn.blobFromImage(image, scale, (416, 416), (0, 0, 0), True, crop=False)
     net.setInput(blob)
 

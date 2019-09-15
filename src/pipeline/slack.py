@@ -75,7 +75,7 @@ def run():
             )
             os.remove(filename)
         except Exception as exc:
-            # because we are running within a thread, a normal "sys.exit(1)" didn't work. Process didn't terminate.
+            # because we are running within a thread, q normal "sys.exit(1)" didn't work. Process didn't terminate.
             # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
             # SIGTERM event from outside.
             print(exc)

@@ -68,7 +68,6 @@ def video_feed():
 
 
 def detect():
-    global outputFrame
 
     # give flask some time to bootstrap the server
     time.sleep(0.02)
@@ -88,26 +87,33 @@ def detect():
             if prediction is not None:
                 slack_send(context)
 
-        display = detection_frame
+        show_img = detection_frame
+
         scale_percent = 40 # percent of original size
-        width = int(display.shape[1] * scale_percent / 100)
-        height = int(display.shape[0] * scale_percent / 100)
+        width = int(show_img.shape[1] * scale_percent / 100)
+        height = int(show_img.shape[0] * scale_percent / 100)
         dim = (width, height)
-        display = cv2.resize(display, dim, interpolation=cv2.INTER_AREA)
 
-        # acquire the lock, set the output frame, and release the
-        # lock
-        with lock:
-            outputFrame = display.copy()
+        display(cv2.resize(show_img, dim, interpolation=cv2.INTER_AREA))
 
+def display(image):
+    global lock, outputFrame
+
+    # acquire the lock, set the output frame, and release the
+    # lock
+    #with lock:
+    #   outputFrame = image.copy()
+
+    cv2.imshow("image", image)
 
 # start a thread that will perform motion detection
-t = threading.Thread(target=detect)
-t.daemon = True
-t.start()
+#t = threading.Thread(target=detect)
+#t.daemon = True
+#t.start()
 
+detect()
 
 # start the flask app
-app.run(host="0.0.0.0", port="8080", debug=False,threaded=False, use_reloader=False)
+#app.run(host="0.0.0.0", port="8080", debug=False,threaded=False, use_reloader=False)
 
 cv2.destroyAllWindows()

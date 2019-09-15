@@ -55,7 +55,7 @@ model = cv2.dnn.readNetFromTensorflow(PATH_TO_CKPT, PATH_TO_PBTXT)
 
 
 def predict(image, class_to_detect, confidence):
-    image_height, image_width, _ = image.shape
+    image_height, image_width= image.shape[:2]
     blob = cv2.dnn.blobFromImage(image, size=(300,300), swapRB=True)
     model.setInput(blob)
     output = model.forward()

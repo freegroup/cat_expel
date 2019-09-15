@@ -14,7 +14,7 @@ def detect_object(context, debug=False):
     try:
         image = context.current_frame
 
-        predictions = predict(image, predict_ids.PERSON, 0.1)
+        predictions = predict(image, predict_ids.PERSON, 0.4)
         dbg = image
         if debug:
             dbg = image.copy()
