@@ -3,9 +3,18 @@ import numpy as np
 import time
 import imutils
 
+from file.configuration import Configuration
+
+conf = Configuration(inifile="config/service.ini", reload_on_change=True)
+fps = conf.get_int("fps", section="camera")
+
+
 cap1 = cv2.VideoCapture(0)
+cap1.set(cv2.CAP_PROP_FPS, fps)
 time.sleep(3.0)
-cap2 = cv2.VideoCapture(1)
+
+cap2 = cv2.VideoCapture(2)
+cap2.set(cv2.CAP_PROP_FPS, fps)
 time.sleep(3.0)
 
 # initialize the video stream and allow the camera sensor to

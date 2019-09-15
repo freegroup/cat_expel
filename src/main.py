@@ -12,6 +12,8 @@ context = collections.namedtuple('Context', 'last_frame last_frames current_fram
 context.last_frames = queue.Queue()
 context.last_frame = None
 
+
+
 from pipeline.slack import slack_send
 from pipeline.motion import detect_motion
 from pipeline.predict import detect_object
