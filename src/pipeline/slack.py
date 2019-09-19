@@ -22,7 +22,7 @@ upload_queue = queue.Queue()
 
 # Keep watching in a loop
 def slack_send(context):
-    global interval_seconds
+    interval_seconds = conf.get_int("interval_seconds", section="slack")
     global last_message_sent
     try:
         # send only one message per "interval_seconds". Sleep for a while (message lost is possible)

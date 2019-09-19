@@ -5,3 +5,4 @@ tqdm==4.32.2
 slackclient==2.1.0
 imageio==2.5.0
 Flask==1.1.1
+gevent=1.4.0
