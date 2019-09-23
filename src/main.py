@@ -23,7 +23,7 @@ def detect():
     for image in images:
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-        time.sleep(0)
+        time.sleep(0.01)
 
         context.current_frame = image
 

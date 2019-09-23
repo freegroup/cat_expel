@@ -12,13 +12,16 @@ fps = conf.get_int("fps", section="camera")
 current_image = None
 lock = threading.Lock()
 
-cap1 = cv2.VideoCapture(2)
+cap1 = cv2.VideoCapture("/dev/video_left")
 cap1.set(cv2.CAP_PROP_FPS, fps)
 time.sleep(3.0)
 
-cap2 = cv2.VideoCapture(0)
+cap2 = cv2.VideoCapture("/dev/video_right")
+print(cap2)
 cap2.set(cv2.CAP_PROP_FPS, fps)
+
 time.sleep(3.0)
+
 
 # initialize the video stream and allow the camera sensor to
 # warmup
