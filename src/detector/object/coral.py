@@ -30,9 +30,7 @@ class predict_ids(Enum):
 
 def predict(image, class_to_detect, confidence):
     image_height, image_width= image.shape[:2]
-    print (type(image))
     image = Image.fromarray(image)
-    print (type(image))
     results = engine.DetectWithImage(image, threshold=0.4, keep_aspect_ratio=True, relative_coord=False, top_k=10)
 
     predictions = []
