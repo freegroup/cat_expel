@@ -1,3 +1,5 @@
+
+
 import cv2
 import queue
 import collections
@@ -25,6 +27,7 @@ def detect():
             break
         time.sleep(0.01)
 
+        print(image)
         context.current_frame = image
 
         write_history(context)
