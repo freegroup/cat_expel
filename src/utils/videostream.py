@@ -8,6 +8,11 @@ class VideoStream:
 		# initialize the video camera stream and read the first frame
 		# from the stream
 		self.stream = cv2.VideoCapture(src)
+		self.stream.set(3, 900)
+		self.stream.set(4, 600)
+		self.stream.set(cv2.CAP_PROP_FPS, 10)
+
+
 		# the camera needs some time to warm up
 		time.sleep(2.0)
 
@@ -35,7 +40,6 @@ class VideoStream:
 				return
 
 			# otherwise, read the next frame from the stream
-			time.sleep(1)
 			(self.grabbed, self.frame) = self.stream.read()
 
 	def read(self):
