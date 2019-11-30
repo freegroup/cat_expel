@@ -8,21 +8,31 @@ import RPi.GPIO as GPIO
 # instead of physical pin numbers
 GPIO.setmode(GPIO.BCM)
 
- #  Motor 1 = [17,18,27,22]
- #  Motor 2 = [23,24,25,4]
- #  Motor 3 = [13,12,6,5]
- #  Motor 4 = [20,26,16,19]
-      
+    
+# Define simple sequence
+Seq1 = [[1,0,0,0],
+        [0,1,0,0],
+        [0,0,1,0],
+        [0,0,0,1]]
+ 
 # Define advanced sequence
 # as shown in manufacturers datasheet
-Seq = [[1,0,0,1],
-       [1,0,0,0],
-       [1,1,0,0],
-       [0,1,0,0],
-       [0,1,1,0],
-       [0,0,1,0],
-       [0,0,1,1],
-       [0,0,0,1]]
+Seq2 = [[1,0,0,0],
+        [1,1,0,0],
+        [0,1,0,0],
+        [0,1,1,0],
+        [0,0,1,0],
+        [0,0,1,1],
+        [0,0,0,1],
+        [1,0,0,1]]
+        
+#Full torque
+Seq3 = [[0,0,1,1],
+        [1,0,0,1],
+        [1,1,0,0],
+        [0,1,1,0]]
+
+Seq = Seq2
   
 class Motor:
 
@@ -40,6 +50,11 @@ class Motor:
       # Initialise variables
       self.step_counter = 0
  
+    def off(self):
+      # Set all pins as output
+      for pin in self.step_pins:
+        GPIO.output(pin, False)
+
     def step(self, dir):
       # Start main loop
       for pin in range(0, 4):
@@ -57,4 +72,16 @@ class Motor:
         self.step_counter = 0
       if (self.step_counter<0):
         self.step_counter = self.step_count+dir
-      time.sleep(self.wait_time)
+
+Motor1 = Motor([17,18,27,22])
+Motor2 = Motor([23,24,25,4])
+motor3 = Motor([13,12,6,5])
+motor4 = Motor([20,26,16,19])
+
+if __name__ == "__main__":
+    try:
+      while True:
+        Motor2.step(1)
+        time.sleep(0.002)
+    except KeyboardInterrupt:
+        Motor2.off()
