@@ -16,7 +16,6 @@ class Motor:
     def step(self, dir):
         self.current_step += dir
         angle = (360/steps_per_rotation * self.current_step)%360
-        print(angle)
         put({"device": self.name, "angle": angle })
 
 

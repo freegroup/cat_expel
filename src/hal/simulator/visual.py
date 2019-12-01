@@ -19,9 +19,8 @@ def on_draw(_delta_time):
 
     try:
         if not queue.empty():
-            queue.get()
-            # Move the angle of the sweep.
-            on_draw.angle += RADIANS_PER_FRAME
+            entry = queue.get()
+            on_draw.angle = (2*3.14 / 360 ) * entry["angle"]
 
         # Calculate the end point of our radar sweep. Using math.
         x = SWEEP_LENGTH * math.sin(on_draw.angle) + CENTER_X
