@@ -1,16 +1,22 @@
 from hal.simulator.visual import put
 
+steps = 64
+ratio = 63.65 * (35/15)
+steps_per_rotation = (360 / steps)*ratio
+
 class Motor:
 
     def __init__(self, name):
-        self.wait_time = 0.001
-        self.step_counter = 0
+        self.current_step = 0
         self.name = name
 
     def off(self):
         pass
 
     def step(self, dir):
-        self.step_counter += dir
-        put({"value": 33})
+        self.current_step += dir
+        angle = (360/steps_per_rotation * self.current_step)%360
+        print(angle)
+        put({"device": self.name, "angle": angle })
+
 
