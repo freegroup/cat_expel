@@ -1,10 +1,6 @@
-
-
 import cv2
 import queue
 import collections
-import threading
-import time
 
 
 context = collections.namedtuple('Context', 'last_frame last_frames current_frame debug_frame')
