@@ -1,15 +1,15 @@
 import math
 
 # Set up the constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 200
+SCREEN_HEIGHT = 200
 SCREEN_TITLE = "Radar Sweep Example"
 
 # These constants control the particulars about the radar
 CENTER_X = SCREEN_WIDTH // 2
 CENTER_Y = SCREEN_HEIGHT // 2
 RADIANS_PER_FRAME = 0.02
-SWEEP_LENGTH = 250
+SWEEP_LENGTH = 80
 
 queue = None
 
