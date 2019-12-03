@@ -7,7 +7,7 @@ def init():
 
 
 def init_gimbal():
-    sweep_steps =0
+    sweep_steps = 0
 
     print("sweep gimbal to the left")
     while not Hardware.Switch1.is_pressed():

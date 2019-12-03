@@ -1,4 +1,4 @@
-from hal.simulator.visual import put
+from hal.simulator.visual import execute
 
 steps = 64
 ratio = 63.65 * (35/15)
@@ -17,6 +17,7 @@ class Motor:
     def set_angle(self, angle):
         self.angle = angle
         self.current_step = int(steps_per_rotation*angle)/360
+        execute({"command": self.name + "_set_angle", "value": self.angle })
 
     def get_angle(self):
         return self.angle
@@ -24,6 +25,6 @@ class Motor:
     def step(self, dir):
         self.current_step += dir
         self.angle = (360/steps_per_rotation * self.current_step) % 360
-        put({"device": self.name, "angle": self.angle })
+        execute({"command": self.name + "_set_angle", "value": self.angle })
 
 
