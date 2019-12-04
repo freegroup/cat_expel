@@ -5,11 +5,11 @@ import os
 from hal.simulator.motor import Motor
 from hal.simulator import visual
 from hal.simulator.switch import Switch
-
+import hal.simulator.camera as camera
 from file.configuration import Configuration
 
 CWD_PATH = os.path.dirname(os.path.realpath(__file__))
-conf = Configuration(inifile=os.path.join(CWD_PATH, "simulator.ini"))
+conf = Configuration(inifile=os.path.join(CWD_PATH, "hardware.ini"))
 
 # required
 # export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -43,6 +43,8 @@ class Hardware():
     # set some random angle for the different motors
     angle = random.randint(switch1_angle, switch2_angle)
     Motor1.set_angle(angle)
+
+    Camera = camera.Camera()
 
     # wait until the UI is up and running
     time.sleep(3)

@@ -1,7 +1,7 @@
 import cv2
 import queue
 import collections
-
+from bootstrap import bootstrap
 
 context = collections.namedtuple('Context', 'last_frame last_frames current_frame debug_frame')
 context.last_frames = queue.Queue()
@@ -42,6 +42,7 @@ def detect():
 
         cv2.imshow("image", thumbnail)
 
+bootstrap()
 detect()
 
 cv2.destroyAllWindows()

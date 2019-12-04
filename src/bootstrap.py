@@ -2,7 +2,7 @@ import time
 
 from hal import Hardware
 
-def init():
+def bootstrap():
     init_gimbal()
 
 
@@ -29,4 +29,4 @@ def init_gimbal():
 
 
 if __name__ == "__main__":
-    init()
+    bootstrap()

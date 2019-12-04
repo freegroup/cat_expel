@@ -7,3 +7,4 @@ imageio==2.5.0
 Flask==1.1.1
 gevent=1.4.0
 arcade==2.1.7
+imutils==0.5.3

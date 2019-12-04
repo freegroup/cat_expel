@@ -22,6 +22,10 @@ upload_queue = queue.Queue()
 
 # Keep watching in a loop
 def slack_send(context):
+    enabled = conf.get_boolean("enabled", section="slack")
+    if not enabled:
+        return
+
     interval_seconds = conf.get_int("interval_seconds", section="slack")
     global last_message_sent
     try:

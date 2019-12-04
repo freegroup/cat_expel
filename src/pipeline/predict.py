@@ -5,8 +5,8 @@ import cv2
 import traceback
 
 #from detector.object.yolo import predict, predict_ids
-#from detector.object.ssd_mobilenet_v2 import predict, predict_ids
-from detector.object.coral import predict, predict_ids
+from detector.object.ssd_mobilenet_v2 import predict, predict_ids
+#from detector.object.coral import predict, predict_ids
 
 
 # Keep watching in a loop

@@ -10,7 +10,7 @@ SWEEP_LENGTH = 80
 queue = None
 
 CWD_PATH = os.path.dirname(os.path.realpath(__file__))
-conf = Configuration(inifile=os.path.join(CWD_PATH, "simulator.ini"))
+conf = Configuration(inifile=os.path.join(CWD_PATH, "hardware.ini"))
 
 
 class Commander(threading.Thread):
@@ -76,21 +76,24 @@ class Commander(threading.Thread):
         try:
             width = conf.get_int(section="screen", key="width")
             height = conf.get_int(section="screen", key="height")
-            center_x = width // 2
-            center_y = height // 2
             switch_diameter =  conf.get_int(section="switch", key="diameter")
 
             # Start the render. This must happen before any drawing
             # commands. We do NOT need an stop render command.
             arcade.start_render()
 
-            # Draw the outline of the radar
+            ###################################################
+            # Draw X Axis
+            ###################################################
+            center_x = width // 2
+            center_y = height // 4 * 3
+            # Draw the outline of axis 1
             arcade.draw_circle_filled(center_x, center_y, SWEEP_LENGTH,
                                        arcade.color.BALL_BLUE, 50)
             # Draw the radar line
             x = SWEEP_LENGTH * math.sin(self.motor1_angle) + center_x
             y = SWEEP_LENGTH * math.cos(self.motor1_angle) + center_y
-            arcade.draw_line(center_x, center_x, x, y, arcade.color.OLIVE, 4)
+            arcade.draw_line(center_x, center_y, x, y, arcade.color.OLIVE, 4)
 
             # draw endswitch1
             x = SWEEP_LENGTH * math.sin(self.switch1_pos_angle) + center_x
