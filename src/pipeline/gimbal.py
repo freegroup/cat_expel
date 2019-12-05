@@ -22,7 +22,8 @@ def gimbal_adjust(context):
         degree = math.degrees(radian)*2
         Hardware.Axis_x.set_target_angle(degree)
 
-    except:
+    except Exception as exc:
+        print(exc)
         print('Unhandled error: {}'.format( sys.exc_info()[1]), file=sys.stderr)
         # because we are running within a thread, a normal "sys.exit(1)" didn't work. Process didn't terminate.
         # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an

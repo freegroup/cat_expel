@@ -8,12 +8,12 @@ import queue
 import traceback
 import imageio
 import threading
-import os
+
+from datetime import datetime, date
 
 from file.configuration import Configuration
 
 conf = Configuration(inifile="config/service.ini", reload_on_change=True)
-
 
 interval_seconds = conf.get_int("interval_seconds", section="slack")
 last_message_sent = time.time()-interval_seconds
@@ -57,7 +57,8 @@ def slack_send(context):
         last_message_sent = time.time()
         return True
 
-    except:
+    except Exception as exc:
+        print(exc)
         print('Unhandled error: {}'.format( sys.exc_info()[1]), file=sys.stderr)
         # because we are running within a thread, a normal "sys.exit(1)" didn't work. Process didn't terminate.
         # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
@@ -73,7 +74,7 @@ def run():
         try:
             filename = upload_queue.get()
             client.files_upload(
-                channels="#allgemein",
+                channels=conf.get("channel", section="slack"),
                 file=filename,
                 title="Target detected"
             )
@@ -82,6 +83,42 @@ def run():
             # because we are running within a thread, q normal "sys.exit(1)" didn't work. Process didn't terminate.
             # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
             # SIGTERM event from outside.
+            print(exc)
+            print('Unhandled error: {}'.format( sys.exc_info()[1]))
+
+        # Clean up the Slack channel and get rid of very old messages
+        #
+        try:
+            now = date.today()
+            days = conf.get_int("days", section="slack")
+            channel_id = None
+            res = client.channels_list(count=1000)
+            for channel in res['channels']:
+                if channel['name'] == conf.get("channel", section="slack"):
+                    channel_id = channel['id']
+                    break
+
+            res = client.channels_history( channel=channel_id, count=1000)
+            for message in res['messages']:
+                ts = message["ts"]
+                timestamp = int(float(ts))
+                dt_object = date.fromtimestamp(timestamp)
+                diff = now - dt_object
+                if diff.days > days:
+                    del_res = client.chat_delete(channel=channel_id, ts=ts)
+                    print(del_res)
+
+
+            res = client.files_list( channels="#"+conf.get("channel", section="slack"), count=1000)
+            for message in res['files']:
+                timestamp = message["created"]
+                dt_object = date.fromtimestamp(timestamp)
+                diff = now - dt_object
+                if diff.days > days:
+                    del_res = client.files_delete(file=message["id"])
+                    print(del_res)
+
+        except Exception as exc:
             print(exc)
             print('Unhandled error: {}'.format( sys.exc_info()[1]))
 

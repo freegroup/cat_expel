@@ -75,5 +75,6 @@ class Configuration:
                 # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
                 # SIGTERM event from outside.
                 os.kill(os.getpid(), signal.SIGTERM)
-            except:
+            except Exception as exc:
+                print(exc)
                 print('Unhandled error: {}'.format( sys.exc_info()[1]), file=sys.stderr)

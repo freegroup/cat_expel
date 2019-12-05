@@ -8,3 +8,5 @@ Flask==1.1.1
 gevent=1.4.0
 arcade==2.1.7
 imutils==0.5.3
+slack-cleaner2==2.0.1
+google-api-python-client==1.7.11
