@@ -4,6 +4,7 @@ from pydoc import locate
 
 conf = Configuration(inifile="config/service.ini")
 
+from hal.axis import Axis
 
 # Read the kind of input source from"service.ini" file and create an instance of them.
 #
@@ -17,3 +18,5 @@ if Hardware is None:
     print("Class [{}] not found.".format(HARDWARE))
     sys.exit(1)
 
+
+Hardware.Axis_x = Axis(Hardware.Motor1, Hardware.Motor2, Hardware.Switch1, Hardware.Switch2)

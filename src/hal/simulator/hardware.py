@@ -30,6 +30,8 @@ class Hardware():
     p = multiprocessing.Process(target=visual.display, args=(queue,))
     p.start()
 
+    Camera = camera.Camera()
+
     Motor1 = Motor("motor1")
     Motor2 = Motor("motor2")
     Motor3 = Motor("motor3")
@@ -44,8 +46,6 @@ class Hardware():
     angle = random.randint(switch1_angle, switch2_angle)
     Motor1.set_angle(angle)
 
-    Camera = camera.Camera()
-
     # wait until the UI is up and running
-    time.sleep(3)
+    time.sleep(1)
 

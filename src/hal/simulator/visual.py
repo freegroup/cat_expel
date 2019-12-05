@@ -29,6 +29,7 @@ class Commander(threading.Thread):
         self.switch2_pos_angle = 0
         self.switch3_pos_angle = 0
         self.switch4_pos_angle = 0
+        self.setDaemon(True)
         self.start()
 
     def execute(self, event):
@@ -38,6 +39,15 @@ class Commander(threading.Thread):
 
     def motor1_set_angle(self, value):
         self.motor1_angle = (2*3.14 / 360 ) * value
+
+    def motor2_set_angle(self, value):
+        self.motor2_angle = (2*3.14 / 360 ) * value
+
+    def motor3_set_angle(self, value):
+        self.motor3_angle = (2*3.14 / 360 ) * value
+
+    def motor4_set_angle(self, value):
+        self.motor4_angle = (2*3.14 / 360 ) * value
 
     def switch1_set_pos_angle(self, value):
         self.switch1_pos_angle = (2*3.14 / 360 ) * value

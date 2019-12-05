@@ -11,6 +11,7 @@ class Switch(threading.Thread):
         self.end_angle_low = pos_angle-5
         self.end_angle_high = pos_angle+5
         execute({"command": self.name + "_set_pos_angle", "value": pos_angle })
+        self.setDaemon(True)
         self.start()
 
     def run(self):

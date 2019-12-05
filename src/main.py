@@ -1,18 +1,18 @@
 import cv2
 import queue
 import collections
-from bootstrap import bootstrap
 
-context = collections.namedtuple('Context', 'last_frame last_frames current_frame debug_frame')
+context = collections.namedtuple('Context', 'last_frame last_frames current_frame debug_frame prediction')
 context.last_frames = queue.Queue()
 context.last_frame = None
 
-
+from hal import Hardware
 from pipeline.slack import slack_send
 from pipeline.motion import detect_motion
 from pipeline.predict import detect_object
 from pipeline.source import get_image
 from pipeline.history import write_history
+from pipeline.gimbal import gimbal_adjust
 
 def detect():
     global lock, outputFrame
@@ -30,6 +30,7 @@ def detect():
             prediction, detection_frame = detect_object(context, debug=True)
             if prediction is not None:
                 slack_send(context)
+                gimbal_adjust(context)
 
         show_img = detection_frame
 
@@ -42,7 +43,7 @@ def detect():
 
         cv2.imshow("image", thumbnail)
 
-bootstrap()
+Hardware.Axis_x.calibrate()
 detect()
 
 cv2.destroyAllWindows()

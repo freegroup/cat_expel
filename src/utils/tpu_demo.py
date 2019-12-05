@@ -78,7 +78,7 @@ out = None
 # execution
 print("[INFO] starting process...")
 p = Process(target=classify_frame, args=(img,inputQueue,outputQueue,))
-p.daemon = True
+p.setDaemon()
 p.start()
 
 print("[INFO] starting capture...")

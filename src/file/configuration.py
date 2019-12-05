@@ -29,8 +29,8 @@ class Configuration:
         if reload_on_change is True:
             self.run_thread = True
             self.thread = threading.Thread(target=self.__run, args=())
-            self.thread.daemon = True      # Daemonized thread
-            self.thread.start()            # Start the execution
+            self.thread.setDaemon(True)      # Daemonized thread
+            self.thread.start()          # Start the execution
 
     def __del__(self):
         self.run_thread = False
