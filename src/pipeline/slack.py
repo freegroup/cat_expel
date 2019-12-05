@@ -124,5 +124,5 @@ def run():
 
 
 thread = threading.Thread(target=run, args=())
-thread.setDaemon(True)        # Daemonized thread
+thread.setDaemon(True)    # Daemonized thread
 thread.start()            # Start the execution

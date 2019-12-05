@@ -2,37 +2,35 @@ import cv2
 import queue
 import collections
 
+from hal import Hardware
+from pipeline.slack import slack_send
+from pipeline.motion import motion_detect
+from pipeline.predict import object_detect
+from pipeline.source import source_get_images
+from pipeline.history import write_history
+from pipeline.gimbal import gimbal_adjust
+
 context = collections.namedtuple('Context', 'last_frame last_frames current_frame debug_frame prediction')
 context.last_frames = queue.Queue()
 context.last_frame = None
 
-from hal import Hardware
-from pipeline.slack import slack_send
-from pipeline.motion import detect_motion
-from pipeline.predict import detect_object
-from pipeline.source import get_image
-from pipeline.history import write_history
-from pipeline.gimbal import gimbal_adjust
-
 def detect():
-    global lock, outputFrame
-
-    images = get_image()
-    for image in images:
+    for image in source_get_images():
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
         context.current_frame = image
 
+        show_img = image
         write_history(context)
-        boxes, motion_frame = detect_motion(context, debug=True)
+        boxes, motion_frame = motion_detect(context, debug=True)
         if boxes is not None:
-            prediction, detection_frame = detect_object(context, debug=True)
+            prediction, detection_frame = object_detect(context, debug=True)
             if prediction is not None:
                 slack_send(context)
                 gimbal_adjust(context)
 
-        show_img = detection_frame
+                show_img = detection_frame
 
         scale_percent = 40 # percent of original size
         width = int(show_img.shape[1] * scale_percent / 100)
@@ -43,7 +41,8 @@ def detect():
 
         cv2.imshow("image", thumbnail)
 
-Hardware.Axis_x.calibrate()
+Hardware.Axis_vertical.calibrate()
+Hardware.Axis_horizontal.calibrate()
 detect()
 
 cv2.destroyAllWindows()

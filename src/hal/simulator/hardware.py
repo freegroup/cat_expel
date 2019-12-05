@@ -16,8 +16,8 @@ conf = Configuration(inifile=os.path.join(CWD_PATH, "hardware.ini"))
 
 import random
 
-class Hardware():
 
+class Hardware():
     switch1_angle = conf.get_int(section="axis_x", key="start_angle")
     switch2_angle = conf.get_int(section="axis_x", key="end_angle")
     switch3_angle = conf.get_int(section="axis_y", key="start_angle")
@@ -39,13 +39,17 @@ class Hardware():
 
     Switch1 = Switch("switch1", Motor1, switch1_angle)
     Switch2 = Switch("switch2", Motor1, switch2_angle)
-    Switch3 = Switch("switch3", Motor2, switch3_angle)
-    Switch4 = Switch("switch4", Motor2, switch4_angle)
+    Switch3 = Switch("switch3", Motor3, switch3_angle)
+    Switch4 = Switch("switch4", Motor3, switch4_angle)
 
     # set some random angle for the different motors
     angle = random.randint(switch1_angle, switch2_angle)
     Motor1.set_angle(angle)
+    Motor2.set_angle(angle)
+
+    angle = random.randint(switch3_angle, switch4_angle)
+    Motor3.set_angle(angle)
+    Motor4.set_angle(angle)
 
     # wait until the UI is up and running
     time.sleep(1)
-

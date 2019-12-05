@@ -62,4 +62,3 @@ class Motor:
 
         if self.step_counter < 0:
             self.step_counter = self.step_count + dir
-
