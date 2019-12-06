@@ -43,10 +43,16 @@ class Axis(threading.Thread):
     def set_target_angle(self, angle):
         self.target_angle = angle
 
+    def get_target_angle(self,):
+        return self.target_angle
+
+    def get_current_angle(self,):
+        return self.motor1.get_angle() - self.calibrated_0_angle
+
     def run(self):
         while True:
-            current_angle = self.motor1.get_angle() - self.calibrated_0_angle
-            if not (self.target_angle - 1) <= current_angle <= (self.target_angle + 1):
+            current_angle = self.get_current_angle()
+            if not ((self.target_angle - 1) <= current_angle <= (self.target_angle + 1)):
                 if self.target_angle > current_angle and not self.endswitch_right.is_pressed():
                     self.motor1.step(1)
                     self.motor2.step(1)
