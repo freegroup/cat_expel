@@ -1,14 +1,12 @@
-from hal import Hardware, Mode
+import RPi.GPIO as GPIO
 import time
-
-hardware = Hardware()
 
 
 class Switch:
     def __init__(self, name, pin):
         self.pin = pin
         self.name = name
-        hardware.setup(pin, Mode.IN)
+        GPIO.setup(self.pin, GPIO.IN)
 
     def is_pressed(self):
-        return hardware.input(self.pin, self.name) == 1
+        return GPIO.input(self.pin) == 1

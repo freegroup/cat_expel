@@ -16,33 +16,36 @@ context.last_frame = None
 
 def detect():
     for image in source_get_images():
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        try:
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
-        context.current_frame = image
+            context.current_frame = image
 
-        show_img = image
-        write_history(context)
-        boxes, motion_frame = motion_detect(context, debug=True)
-        if boxes is not None:
-            prediction, detection_frame = object_detect(context, debug=True)
-            if prediction is not None:
-                slack_send(context)
-                gimbal_adjust(context)
+            show_img = image
+            write_history(context)
+            boxes, motion_frame = motion_detect(context, debug=True)
+            if boxes is not None:
+                prediction, detection_frame = object_detect(context, debug=True)
+                if prediction is not None:
+                    slack_send(context)
+                    gimbal_adjust(context)
 
-                show_img = detection_frame
+                    show_img = detection_frame
 
-        scale_percent = 40 # percent of original size
-        width = int(show_img.shape[1] * scale_percent / 100)
-        height = int(show_img.shape[0] * scale_percent / 100)
-        dim = (width, height)
+            scale_percent = 40 # percent of original size
+            width = int(show_img.shape[1] * scale_percent / 100)
+            height = int(show_img.shape[0] * scale_percent / 100)
+            dim = (width, height)
 
-        thumbnail = cv2.resize(show_img, dim, interpolation=cv2.INTER_AREA)
+            thumbnail = cv2.resize(show_img, dim, interpolation=cv2.INTER_AREA)
 
-        cv2.imshow("image", thumbnail)
+            cv2.imshow("image", thumbnail)
+        except Exception as exc:
+            print(exc)
 
-Hardware.Axis_vertical.calibrate()
+#Hardware.Axis_vertical.calibrate()
 Hardware.Axis_horizontal.calibrate()
-detect()
+#detect()
 
 cv2.destroyAllWindows()

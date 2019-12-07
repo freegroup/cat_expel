@@ -71,6 +71,7 @@ class Configuration:
                     self.after_reload_callback()
             except (KeyboardInterrupt, SystemExit):
                 self.run_thread = False
+                print("got keyboard interrupt")
                 # because we are running within a thread, a normal "sys.exit(1)" didn't work. Process didn't terminate.
                 # sys.exit(...) throws just an exception which isn'T catch by the main thread. Workaround: send an
                 # SIGTERM event from outside.
