@@ -48,4 +48,7 @@ def detect():
 Hardware.Axis_horizontal.calibrate()
 #detect()
 
+Hardware.Axis_vertical.off()
+Hardware.Axis_horizontal.off()
+
 cv2.destroyAllWindows()
