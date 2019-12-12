@@ -15,6 +15,7 @@ class Axis(threading.Thread):
         self.target_angle = 0
 
     def calibrate(self):
+        print("calibrate...")
         sweep_steps = 0
 
         while not self.endswitch_left.is_pressed():
