@@ -196,4 +196,5 @@ def display(q):
         arcade.close_window()
     except Exception as exc:
         print(exc)
+        print("visual error")
         print("Error")

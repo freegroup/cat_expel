@@ -15,6 +15,7 @@ class Axis(threading.Thread):
         self.target_angle = 0
 
     def calibrate(self):
+        print("calibrate...")
         sweep_steps = 0
 
         while not self.endswitch_left.is_pressed():
@@ -43,11 +44,15 @@ class Axis(threading.Thread):
     def set_target_angle(self, angle):
         self.target_angle = angle
 
-    def get_target_angle(self,):
+    def get_target_angle(self):
         return self.target_angle
 
-    def get_current_angle(self,):
+    def get_current_angle(self):
         return self.motor1.get_angle() - self.calibrated_0_angle
+
+    def off(self):
+        self.motor1.off()
+        self.motor2.off()
 
     def run(self):
         while True:

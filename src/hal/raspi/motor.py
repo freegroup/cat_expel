@@ -25,17 +25,23 @@ Seq3 = [[0, 0, 1, 1],
 
 Seq = Seq2
 
+steps = 64
+ratio = 63.65 * (35 / 15)
+steps_per_rotation = (steps * ratio)
 
 class Motor:
 
-    def __init__(self, name, pins):
+    def __init__(self, name, dir, pins):
         self.step_pins = pins
         self.name = name
+        self.dir = dir
+        self.current_step = 0
+        self.angle = 0
 
         # Set all pins as output
         for pin in self.step_pins:
-            GPIO.setup(pin, GPIO.OUT, self.name)
-            GPIO.output(pin, False, self.name)
+            GPIO.setup(pin, GPIO.OUT)
+            GPIO.output(pin, False)
 
         self.step_count = len(Seq)
         self.wait_time = 0.001
@@ -48,11 +54,19 @@ class Motor:
         for pin in self.step_pins:
             GPIO.output(pin, False)
 
+    def set_angle(self, angle):
+        self.angle = angle
+        self.current_step = int(steps_per_rotation * angle) / 360
+
+    def get_angle(self):
+        return self.angle
+
     def step(self, dir):
         for index in range(0, 4):
-            xpin = pin[index]  #
+            xpin = self.step_pins[index]  #
             xvalue = Seq[self.step_counter][index]
             GPIO.output(xpin, xvalue)
+        dir = dir * self.dir
         self.step_counter += dir
 
         # If we reach the end of the sequence
@@ -62,3 +76,4 @@ class Motor:
 
         if self.step_counter < 0:
             self.step_counter = self.step_count + dir
+        self.angle = ((360 / steps_per_rotation) * self.current_step) % 360
