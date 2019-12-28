@@ -29,6 +29,6 @@ def draw_prediction(img, prediction):
     color = (0,0,250)
     box = prediction.bounding_box
     center = (int(box.x+(box.w/2)), int(box.y+(box.h/2)))
-    print(image_width, image_height, box, center)
+    # print(image_width, image_height, box, center)
     cv2.circle(img, center, 30, color, thickness=5)
     cv2.rectangle(img, box, color, thickness=2) 

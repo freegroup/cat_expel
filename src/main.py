@@ -29,7 +29,7 @@ def detect():
                 prediction, detection_frame = object_detect(context, debug=True)
                 if prediction is not None:
                     #slack_send(context)
-                    #gimbal_adjust(context)
+                    gimbal_adjust(context)
 
                     show_img = detection_frame
 
@@ -44,8 +44,8 @@ def detect():
         except Exception as exc:
             print(exc)
 
-#Hardware.Axis_vertical.calibrate()
-#Hardware.Axis_horizontal.calibrate()
+Hardware.Axis_vertical.calibrate()
+Hardware.Axis_horizontal.calibrate()
 detect()
 
 Hardware.Axis_vertical.off()

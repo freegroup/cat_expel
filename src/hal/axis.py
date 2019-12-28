@@ -43,12 +43,12 @@ class Axis(threading.Thread):
 
     def set_target_angle(self, angle):
         self.target_angle = angle
-        print(angle)
-
+ 
     def get_target_angle(self):
         return self.target_angle
 
     def get_current_angle(self):
+        print("Motor 1:"+str(self.motor1.get_angle() ))
         return self.motor1.get_angle() - self.calibrated_0_angle
 
     def off(self):

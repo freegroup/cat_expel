@@ -76,4 +76,6 @@ class Motor:
 
         if self.step_counter < 0:
             self.step_counter = self.step_count + dir
+
+        self.current_step += dir
         self.angle = ((360 / steps_per_rotation) * self.current_step) % 360
