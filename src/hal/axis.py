@@ -43,6 +43,7 @@ class Axis(threading.Thread):
 
     def set_target_angle(self, angle):
         self.target_angle = angle
+        print(angle)
 
     def get_target_angle(self):
         return self.target_angle

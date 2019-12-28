@@ -9,9 +9,11 @@ class VideoStream:
         # initialize the video camera stream and read the first frame
         # from the stream
         self.stream = cv2.VideoCapture(src)
-        self.stream.set(3, 900)
-        self.stream.set(4, 600)
-        self.stream.set(cv2.CAP_PROP_FPS, 10)
+        self.stream.set(3, 1920)
+        self.stream.set(4, 1080)
+        # self.stream.set(cv2.CAP_PROP_FPS, 10)
+        # cv2.SetCaptureProperty(self.stream,cv2.CV_CAP_PROP_FRAME_WIDTH, 1280)
+        # cv2.SetCaptureProperty(self.stream,cv2.CV_CAP_PROP_FRAME_HEIGHT, 720)
 
         # the camera needs some time to warm up
         time.sleep(2.0)
