@@ -18,5 +18,5 @@ if Hardware is None:
     print("Class [{}] not found.".format(HARDWARE))
     sys.exit(1)
 print("Using hardware layer :"+HARDWARE)
-Hardware.Axis_horizontal = Axis(Hardware.Motor1, Hardware.Motor2, Hardware.Switch1, Hardware.Switch2)
-Hardware.Axis_vertical = Axis(Hardware.Motor3, Hardware.Motor4, Hardware.Switch3, Hardware.Switch4)
+Hardware.Axis_horizontal = Axis(Hardware.Motor1)
+Hardware.Axis_vertical = Axis(Hardware.Motor2, Hardware.Motor3)
