@@ -14,6 +14,10 @@ class Motor:
     def off(self):
         pass
 
+    def set_null(self):
+        self.angle = 0
+        self.current_step = 0
+
     def set_angle(self, angle):
         self.angle = angle
         self.current_step = int(steps_per_rotation * angle) / 360

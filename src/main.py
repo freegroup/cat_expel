@@ -44,7 +44,7 @@ def detect():
         except Exception as exc:
             print(exc)
 
-Hardware.Axis_vertical.calibrate()
+#Hardware.Axis_vertical.calibrate()
 Hardware.Axis_horizontal.calibrate()
 detect()
 

@@ -13,31 +13,33 @@ class Axis(threading.Thread):
 
         self.calibrated_0_angle = 0
         self.target_angle = 0
+        self.wait_time = 0.005
 
     def calibrate(self):
         print("calibrate...")
-        sweep_steps = 0
 
         while not self.endswitch_left.is_pressed():
             self.motor1.step(-1)
             self.motor2.step(-1)
-            time.sleep(0.001)
+            time.sleep(self.wait_time)
 
+        sweep_steps = 0
         while not self.endswitch_right.is_pressed():
             sweep_steps = sweep_steps + 1
             self.motor1.step(1)
             self.motor2.step(1)
-            time.sleep(0.001)
+            time.sleep(self.wait_time)
 
         center_sweep = int(sweep_steps / 2)
         while center_sweep > 0:
             self.motor1.step(-1)
             self.motor2.step(-1)
-            time.sleep(0.001)
+            time.sleep(self.wait_time)
             center_sweep = center_sweep - 1
 
-        self.calibrated_0_angle = self.motor1.get_angle()
-        self.target_angle = self.calibrated_0_angle
+        self.motor1.set_null()
+        self.motor2.set_null()
+        self.target_angle = 0
         self.setDaemon(True)
         self.start()
 
@@ -48,8 +50,7 @@ class Axis(threading.Thread):
         return self.target_angle
 
     def get_current_angle(self):
-        print("Motor 1:"+str(self.motor1.get_angle() ))
-        return self.motor1.get_angle() - self.calibrated_0_angle
+        return self.motor1.get_angle()
 
     def off(self):
         self.motor1.off()
@@ -65,4 +66,6 @@ class Axis(threading.Thread):
                 elif self.target_angle < current_angle and not self.endswitch_left.is_pressed():
                     self.motor1.step(-1)
                     self.motor2.step(-1)
-            time.sleep(0.001)
+                time.sleep(self.wait_time)
+            else:
+                time.sleep(self.wait_time*10)
