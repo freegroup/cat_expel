@@ -14,7 +14,7 @@ def gimbal_adjust(context):
     norm_x, norm_y =(x/img_w-0.5, y/img_h-0.5)
 
     radian = -math.sin(norm_x)
-    degree = math.degrees(radian)*1.4
+    degree = math.degrees(radian)*1.8
     Hardware.Axis_horizontal.set_angle(degree)
     return
 
