@@ -44,7 +44,7 @@ def detect():
         except Exception as exc:
             print(exc)
 
-#Hardware.Axis_vertical.center()
+Hardware.Axis_vertical.center()
 Hardware.Axis_horizontal.center()
 
 detect()
