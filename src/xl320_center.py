@@ -14,23 +14,24 @@ import time
 
 servoType = pyservos.XL320
 servoStr =  'XL-320'
-ID= 1
 port = "/dev/ttyS0"
 
 angle = 30
 speed= 312
 
-print('Setting {} servo[{}] to {:.2f} on port {}'.format(servoStr, ID, angle, port))
-
 serial = ServoSerial(port=port)
 serial.open()
 
 servo = Packet(servoType)
-def set_angle(angle):
+def set_angle(id, angle):
     val = angle2int(angle, degrees=True) + le(speed)
-    pkt = servo.makeWritePacket(ID, servo.base.GOAL_POSITION, val)
+    pkt = servo.makeWritePacket(id, servo.base.GOAL_POSITION, val)
     serial.sendPkt(pkt)  # send packet to servo
 
-set_angle(150)
+while True:
+    set_angle(1,150)
+    set_angle(2,150)
+    set_angle(3,150)
+    set_angle(4,150)
 time.sleep(2)
     
