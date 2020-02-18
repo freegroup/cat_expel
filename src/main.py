@@ -3,7 +3,8 @@ import queue
 import collections
 
 from hal import Hardware
-from pipeline.slack import slack_send
+# from pipeline.slack import messanger_send
+from pipeline.telegram import messanger_send
 from pipeline.motion import motion_detect
 from pipeline.predict import object_detect
 from pipeline.source import source_get_images
@@ -28,7 +29,7 @@ def detect():
             if boxes is not None:
                 prediction, detection_frame = object_detect(context, debug=True)
                 if prediction is not None:
-                    #slack_send(context)
+                    messanger_send(context)
                     gimbal_adjust(context)
 
                     show_img = detection_frame

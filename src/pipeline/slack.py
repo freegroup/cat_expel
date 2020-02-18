@@ -21,7 +21,7 @@ upload_queue = queue.Queue()
 
 
 # Keep watching in a loop
-def slack_send(context):
+def messanger_send(context):
     enabled = conf.get_boolean("enabled", section="slack")
     if not enabled:
         return
