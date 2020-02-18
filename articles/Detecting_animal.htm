@@ -1,0 +1,3011 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en" data-rh="lang">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Detecting animals in the backyard — practical application of deep learning.</title>
+  <meta data-rh="true" name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta data-rh="true" name="theme-color" content="#000000">
+  <meta data-rh="true" name="twitter:app:name:iphone" content="Medium">
+  <meta data-rh="true" name="twitter:app:id:iphone" content="828256236">
+  <meta data-rh="true" property="al:ios:app_name" content="Medium">
+  <meta data-rh="true" property="al:ios:app_store_id" content="828256236">
+  <meta data-rh="true" property="al:android:package" content="com.medium.reader">
+  <meta data-rh="true" property="fb:app_id" content="542599432471018">
+  <meta data-rh="true" property="og:site_name" content="Medium">
+  <meta data-rh="true" property="og:type" content="article">
+  <meta data-rh="true" property="article:published_time" content="2020-02-13T16:26:22.425Z">
+  <meta data-rh="true" name="title"
+    content="Detecting animals in the backyard — practical application of deep learning.">
+  <meta data-rh="true" property="og:title"
+    content="Detecting animals in the backyard — practical application of deep learning.">
+  <meta data-rh="true" property="twitter:title"
+    content="Detecting animals in the backyard — practical application of deep learning.">
+  <meta data-rh="true" name="twitter:site" content="@Medium">
+  <meta data-rh="true" name="twitter:app:url:iphone" content="medium://p/c030d3263ba8">
+  <meta data-rh="true" property="al:android:url" content="medium://p/c030d3263ba8">
+  <meta data-rh="true" property="al:ios:url" content="medium://p/c030d3263ba8">
+  <meta data-rh="true" property="al:android:app_name" content="Medium">
+  <meta data-rh="true" name="description"
+    content="This post is based on my experience of applying existing deep learning techniques in real (and rural) life situations. As you may have already understood from my previous posts, I’m kind of a…">
+  <meta data-rh="true" property="og:description"
+    content="This post is based on my experience of applying existing deep learning techniques in real (and rural) life situations">
+  <meta data-rh="true" property="twitter:description"
+    content="This post is based on my experience of applying existing deep learning techniques in real (and rural) life situations">
+  <meta data-rh="true" property="og:url"
+    content="https://medium.com/@gaiar/detecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8">
+  <meta data-rh="true" property="al:web:url"
+    content="https://medium.com/@gaiar/detecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8">
+  <meta data-rh="true" property="og:image" content="https://miro.medium.com/max/1200/1*xA0v-P_aMXw-1aOFwgFkKg.png">
+  <meta data-rh="true" name="twitter:image:src" content="https://miro.medium.com/max/1200/1*xA0v-P_aMXw-1aOFwgFkKg.png">
+  <meta data-rh="true" name="twitter:card" content="summary_large_image">
+  <meta data-rh="true" property="article:author" content="https://medium.com/@gaiar">
+  <meta data-rh="true" name="twitter:creator" content="@_gaiar_">
+  <meta data-rh="true" name="author" content="Gaiar Baimuratov">
+  <meta data-rh="true" name="robots" content="index,follow">
+  <meta data-rh="true" name="referrer" content="unsafe-url">
+  <meta data-rh="true" name="twitter:label1" value="Reading time">
+  <meta data-rh="true" name="twitter:data1" value="10 min read">
+  <meta data-rh="true" name="parsely-post-id" content="c030d3263ba8">
+  <link data-rh="true" rel="search" type="application/opensearchdescription+xml" title="Medium"
+    href="https://medium.com/osd.xml">
+  <link data-rh="true" rel="apple-touch-icon" sizes="152x152"
+    href="https://cdn-images-1.medium.com/fit/c/152/152/1*8I-HPL0bfoIzGied-dzOvA.png">
+  <link data-rh="true" rel="apple-touch-icon" sizes="120x120"
+    href="https://cdn-images-1.medium.com/fit/c/120/120/1*8I-HPL0bfoIzGied-dzOvA.png">
+  <link data-rh="true" rel="apple-touch-icon" sizes="76x76"
+    href="https://cdn-images-1.medium.com/fit/c/76/76/1*8I-HPL0bfoIzGied-dzOvA.png">
+  <link data-rh="true" rel="apple-touch-icon" sizes="60x60"
+    href="https://cdn-images-1.medium.com/fit/c/60/60/1*8I-HPL0bfoIzGied-dzOvA.png">
+  <link data-rh="true" rel="mask-icon"
+    href="https://cdn-static-1.medium.com/_/fp/icons/monogram-mask.KPLCSFEZviQN0jQ7veN2RQ.svg" color="#171717">
+  <link data-rh="true" rel="icon"
+    href="https://cdn-static-1.medium.com/_/fp/icons/favicon-rebrand-medium.3Y6xpZ-0FSdWDnPM3hSBIA.ico">
+  <link data-rh="true" id="glyph_link" rel="stylesheet" type="text/css"
+    href="./Detecting animals in the backyard — practical application of deep learning._files/m2.css">
+  <link data-rh="true" rel="author" href="https://medium.com/@gaiar">
+  <link data-rh="true" rel="canonical"
+    href="https://medium.com/@gaiar/detecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8">
+  <link data-rh="true" rel="alternate" href="android-app://com.medium.reader/https/medium.com/p/c030d3263ba8">
+  <script data-rh="true"
+    type="application/ld+json">{"@context":"http:\u002F\u002Fschema.org","@type":"NewsArticle","image":["https:\u002F\u002Fmiro.medium.com\u002Fmax\u002F1200\u002F1*xA0v-P_aMXw-1aOFwgFkKg.png"],"url":"https:\u002F\u002Fmedium.com\u002F@gaiar\u002Fdetecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8","dateCreated":"2020-02-13T16:26:22.425Z","datePublished":"2020-02-13T16:26:22.425Z","dateModified":"2020-02-13T17:54:50.296Z","headline":"Detecting animals in the backyard — practical application of deep learning.","name":"Detecting animals in the backyard — practical application of deep learning.","description":"This post is based on my experience of applying existing deep learning techniques in real (and rural) life situations. As you may have already understood from my previous posts, I’m kind of a…","identifier":"c030d3263ba8","keywords":["Lite:true","Tag:Computer Vision","Tag:TensorFlow","Tag:Wildlife","Tag:Neural Networks","Tag:Deep Learning","Topic:Machine Learning","Topic:Data Science","Elevated:false","LockedPostSource:LOCKED_POST_SOURCE_UGC","LayerCake:3"],"author":{"@type":"Person","name":"Gaiar Baimuratov","url":"https:\u002F\u002Fmedium.com\u002F@gaiar"},"creator":["Gaiar Baimuratov"],"publisher":{"@type":"Organization","name":"Medium","url":"https:\u002F\u002Fmedium.com\u002F","logo":{"@type":"ImageObject","width":308,"height":60,"url":"https:\u002F\u002Fmiro.medium.com\u002Fmax\u002F616\u002F1*OMF3fSqH8t4xBJ9-6oZDZw.png"}},"mainEntityOfPage":"https:\u002F\u002Fmedium.com\u002F@gaiar\u002Fdetecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8","isAccessibleForFree":"False","hasPart":{"@type":"WebPageElement","isAccessibleForFree":"False","cssSelector":".meteredContent"}}</script>
+  <link rel="preload"
+    href="./Detecting animals in the backyard — practical application of deep learning._files/16180790160.js"
+    as="script">
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="STATIC">
+    html {
+      box-sizing: border-box
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      color: rgba(0, 0, 0, 0.8);
+      position: relative;
+      min-height: 100vh
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dl,
+    dd,
+    ol,
+    ul,
+    menu,
+    figure,
+    blockquote,
+    p,
+    pre,
+    form {
+      margin: 0
+    }
+
+    menu,
+    ol,
+    ul {
+      padding: 0;
+      list-style: none;
+      list-style-image: none
+    }
+
+    main {
+      display: block
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    a,
+    button,
+    input {
+      -webkit-tap-highlight-color: transparent
+    }
+
+    img,
+    svg {
+      vertical-align: middle
+    }
+
+    button {
+      background: transparent;
+      overflow: visible
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      margin: 0
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="KEYFRAME">
+    @-webkit-keyframes k1 {
+      0% {
+        transform: scale(1);
+        opacity: 1
+      }
+
+      70% {
+        transform: scale(1.4);
+        opacity: 0
+      }
+
+      100% {
+        opacity: 0
+      }
+    }
+
+    @-moz-keyframes k1 {
+      0% {
+        transform: scale(1);
+        opacity: 1
+      }
+
+      70% {
+        transform: scale(1.4);
+        opacity: 0
+      }
+
+      100% {
+        opacity: 0
+      }
+    }
+
+    @keyframes k1 {
+      0% {
+        transform: scale(1);
+        opacity: 1
+      }
+
+      70% {
+        transform: scale(1.4);
+        opacity: 0
+      }
+
+      100% {
+        opacity: 0
+      }
+    }
+
+    @-webkit-keyframes k2 {
+      0% {
+        transform: matrix(0.97, 0, 0, 1, 0, 12);
+        opacity: 0
+      }
+
+      20% {
+        transform: matrix(0.99, 0, 0, 1, 0, 2);
+        opacity: 0.7
+      }
+
+      40% {
+        transform: matrix(1, 0, 0, 1, 0, -1);
+        opacity: 1
+      }
+
+      70% {
+        transform: matrix(1, 0, 0, 1, 0, 0);
+        opacity: 1
+      }
+
+      100% {
+        transform: matrix(1, 0, 0, 1, 0, 0);
+        opacity: 1
+      }
+    }
+
+    @-moz-keyframes k2 {
+      0% {
+        transform: matrix(0.97, 0, 0, 1, 0, 12);
+        opacity: 0
+      }
+
+      20% {
+        transform: matrix(0.99, 0, 0, 1, 0, 2);
+        opacity: 0.7
+      }
+
+      40% {
+        transform: matrix(1, 0, 0, 1, 0, -1);
+        opacity: 1
+      }
+
+      70% {
+        transform: matrix(1, 0, 0, 1, 0, 0);
+        opacity: 1
+      }
+
+      100% {
+        transform: matrix(1, 0, 0, 1, 0, 0);
+        opacity: 1
+      }
+    }
+
+    @keyframes k2 {
+      0% {
+        transform: matrix(0.97, 0, 0, 1, 0, 12);
+        opacity: 0
+      }
+
+      20% {
+        transform: matrix(0.99, 0, 0, 1, 0, 2);
+        opacity: 0.7
+      }
+
+      40% {
+        transform: matrix(1, 0, 0, 1, 0, -1);
+        opacity: 1
+      }
+
+      70% {
+        transform: matrix(1, 0, 0, 1, 0, 0);
+        opacity: 1
+      }
+
+      100% {
+        transform: matrix(1, 0, 0, 1, 0, 0);
+        opacity: 1
+      }
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE">
+    .a {
+      font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif
+    }
+
+    .b {
+      font-weight: 400
+    }
+
+    .c {
+      background-color: rgba(255, 255, 255, 1)
+    }
+
+    .l {
+      height: 100vh
+    }
+
+    .m {
+      width: 100vw
+    }
+
+    .n {
+      display: flex
+    }
+
+    .o {
+      align-items: center
+    }
+
+    .p {
+      justify-content: center
+    }
+
+    .q {
+      fill: rgba(0, 0, 0, 0.84)
+    }
+
+    .r {
+      display: block
+    }
+
+    .s {
+      position: fixed
+    }
+
+    .t {
+      top: 0
+    }
+
+    .u {
+      left: 0
+    }
+
+    .v {
+      right: 0
+    }
+
+    .w {
+      z-index: 500
+    }
+
+    .x {
+      box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05)
+    }
+
+    .ai {
+      max-width: 1192px
+    }
+
+    .aj {
+      min-width: 0
+    }
+
+    .ak {
+      width: 100%
+    }
+
+    .al {
+      height: 65px
+    }
+
+    .ao {
+      flex: 1 0 auto
+    }
+
+    .ap {
+      font-family: 'Helvetica Neue', sans-serif
+    }
+
+    .aq {
+      font-size: 20px
+    }
+
+    .ar {
+      color: rgba(0, 0, 0, 0.84)
+    }
+
+    .as {
+      margin-top: 7px
+    }
+
+    .at {
+      margin-left: 10px
+    }
+
+    .au {
+      display: -webkit-box
+    }
+
+    .av {
+      -webkit-line-clamp: 1
+    }
+
+    .aw {
+      -webkit-box-orient: vertical
+    }
+
+    .ax {
+      overflow: hidden
+    }
+
+    .bc {
+      display: none
+    }
+
+    .be {
+      margin-left: 15px
+    }
+
+    .bf {
+      margin-top: 1px
+    }
+
+    .bg {
+      visibility: hidden
+    }
+
+    .bh {
+      flex: 0 0 auto
+    }
+
+    .bi {
+      color: inherit
+    }
+
+    .bj {
+      fill: inherit
+    }
+
+    .bk {
+      font-size: inherit
+    }
+
+    .bl {
+      border: inherit
+    }
+
+    .bm {
+      font-family: inherit
+    }
+
+    .bn {
+      letter-spacing: inherit
+    }
+
+    .bo {
+      font-weight: inherit
+    }
+
+    .bp {
+      padding: 0
+    }
+
+    .bq {
+      margin: 0
+    }
+
+    .br:hover {
+      cursor: pointer
+    }
+
+    .bs:hover {
+      color: rgba(0, 0, 0, 0.9)
+    }
+
+    .bt:hover {
+      fill: rgba(0, 0, 0, 0.9)
+    }
+
+    .bu:focus {
+      outline: none
+    }
+
+    .bv:disabled {
+      cursor: default
+    }
+
+    .bw:disabled {
+      color: rgba(0, 0, 0, 0.54)
+    }
+
+    .bx:disabled {
+      fill: rgba(0, 0, 0, 0.54)
+    }
+
+    .by {
+      font-family: medium-content-sans-serif-font, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif
+    }
+
+    .bz {
+      font-style: normal
+    }
+
+    .ca {
+      line-height: 20px
+    }
+
+    .cb {
+      font-size: 15.8px
+    }
+
+    .cc {
+      letter-spacing: 0px
+    }
+
+    .cd {
+      color: rgba(0, 0, 0, 0.54)
+    }
+
+    .ce {
+      fill: rgba(0, 0, 0, 0.54)
+    }
+
+    .cf {
+      margin-left: 16px
+    }
+
+    .cg {
+      color: rgba(2, 158, 116, 1)
+    }
+
+    .ch {
+      fill: rgba(3, 168, 124, 1)
+    }
+
+    .ci:hover {
+      color: rgba(1, 143, 105, 1)
+    }
+
+    .cj:hover {
+      fill: rgba(2, 158, 116, 1)
+    }
+
+    .ck:disabled {
+      color: rgba(3, 168, 124, 0.5)
+    }
+
+    .cl:disabled {
+      fill: rgba(3, 168, 124, 0.5)
+    }
+
+    .cm {
+      padding: 8px 16px
+    }
+
+    .cn {
+      background: 0
+    }
+
+    .co {
+      border-color: rgba(3, 168, 124, 1)
+    }
+
+    .cp:hover {
+      border-color: rgba(2, 158, 116, 1)
+    }
+
+    .cq {
+      border-radius: 4px
+    }
+
+    .cr {
+      border-width: 1px
+    }
+
+    .cs {
+      border-style: solid
+    }
+
+    .ct {
+      box-sizing: border-box
+    }
+
+    .cu {
+      display: inline-block
+    }
+
+    .cv {
+      text-decoration: none
+    }
+
+    .cw {
+      margin-bottom: 0px
+    }
+
+    .cy {
+      padding-left: 24px
+    }
+
+    .cz {
+      padding-right: 24px
+    }
+
+    .da {
+      margin-left: auto
+    }
+
+    .db {
+      margin-right: auto
+    }
+
+    .dc {
+      max-width: 728px
+    }
+
+    .dd {
+      flex-direction: column
+    }
+
+    .de {
+      position: absolute
+    }
+
+    .df {
+      top: calc(100vh + 100px)
+    }
+
+    .dg {
+      bottom: calc(100vh + 100px)
+    }
+
+    .dh {
+      width: 10px
+    }
+
+    .di {
+      pointer-events: none
+    }
+
+    .dj {
+      word-break: break-word
+    }
+
+    .dk {
+      word-wrap: break-word
+    }
+
+    .dl:after {
+      display: block
+    }
+
+    .dm:after {
+      content: ""
+    }
+
+    .dn:after {
+      clear: both
+    }
+
+    .do {
+      max-width: 680px
+    }
+
+    .dp {
+      line-height: 1.23
+    }
+
+    .dq {
+      letter-spacing: 0
+    }
+
+    .dr {
+      font-family: medium-content-title-font, Georgia, Cambria, "Times New Roman", Times, serif
+    }
+
+    .ec {
+      margin-bottom: -0.27em
+    }
+
+    .ei {
+      margin-top: 32px
+    }
+
+    .ej {
+      justify-content: space-between
+    }
+
+    .en {
+      position: relative
+    }
+
+    .eo {
+      width: 48px
+    }
+
+    .ep {
+      height: 48px
+    }
+
+    .eq {
+      flex-direction: row
+    }
+
+    .er {
+      width: calc(100% + 25px)
+    }
+
+    .es {
+      height: calc(100% + 25px)
+    }
+
+    .et {
+      top: 50%
+    }
+
+    .eu {
+      left: 50%
+    }
+
+    .ev {
+      transform: translateX(-50%) translateY(-50%)
+    }
+
+    .ew {
+      border-radius: 50%
+    }
+
+    .ex {
+      margin-left: 12px
+    }
+
+    .ey {
+      margin-bottom: 2px
+    }
+
+    .fa {
+      font-weight: 300
+    }
+
+    .fb {
+      font-size: 16px
+    }
+
+    .fc {
+      max-height: 20px
+    }
+
+    .fd {
+      text-overflow: ellipsis
+    }
+
+    .fe:hover {
+      text-decoration: underline
+    }
+
+    .ff {
+      margin-left: 8px
+    }
+
+    .fg {
+      padding: 0px 8px
+    }
+
+    .fh {
+      border-color: rgba(0, 0, 0, 0.54)
+    }
+
+    .fi:hover {
+      color: rgba(0, 0, 0, 0.97)
+    }
+
+    .fj:hover {
+      fill: rgba(0, 0, 0, 0.97)
+    }
+
+    .fk:hover {
+      border-color: rgba(0, 0, 0, 0.84)
+    }
+
+    .fl:disabled {
+      fill: rgba(0, 0, 0, 0.76)
+    }
+
+    .fm:disabled {
+      border-color: rgba(0, 0, 0, 0.2)
+    }
+
+    .fn:disabled {
+      cursor: inherit
+    }
+
+    .fo:disabled:hover {
+      color: rgba(0, 0, 0, 0.54)
+    }
+
+    .fp:disabled:hover {
+      fill: rgba(0, 0, 0, 0.76)
+    }
+
+    .fq:disabled:hover {
+      border-color: rgba(0, 0, 0, 0.2)
+    }
+
+    .fr {
+      line-height: 18px
+    }
+
+    .fs {
+      font-size: 15px
+    }
+
+    .ft {
+      align-items: flex-end
+    }
+
+    .gb {
+      padding-right: 8px
+    }
+
+    .gc {
+      margin-right: -6px
+    }
+
+    .gd {
+      clear: both
+    }
+
+    .gm {
+      max-width: 3000px
+    }
+
+    .gs {
+      padding-bottom: 5px
+    }
+
+    .gt {
+      padding-top: 5px
+    }
+
+    .gu {
+      transition: transform 300ms cubic-bezier(0.2, 0, 0.2, 1)
+    }
+
+    .gv {
+      cursor: zoom-in
+    }
+
+    .gw {
+      z-index: auto
+    }
+
+    .gx {
+      opacity: 0
+    }
+
+    .gy {
+      transition: opacity 100ms 400ms
+    }
+
+    .gz {
+      height: 100%
+    }
+
+    .ha {
+      will-change: transform
+    }
+
+    .hb {
+      transform: translateZ(0)
+    }
+
+    .hc {
+      margin: auto
+    }
+
+    .hd {
+      background-color: rgba(0, 0, 0, 0.05)
+    }
+
+    .he {
+      padding-bottom: 35.166666666666664%
+    }
+
+    .hf {
+      filter: blur(20px)
+    }
+
+    .hg {
+      transform: scale(1.1)
+    }
+
+    .hh {
+      visibility: visible
+    }
+
+    .hi {
+      background: rgba(255, 255, 255, 1)
+    }
+
+    .hj {
+      line-height: 1.58
+    }
+
+    .hk {
+      letter-spacing: -0.004em
+    }
+
+    .hl {
+      font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman", Times, serif
+    }
+
+    .hw {
+      margin-bottom: -0.46em
+    }
+
+    .hx {
+      background-repeat: repeat-x
+    }
+
+    .hy {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.84) 100%, rgba(0, 0, 0, 0.84) 0);
+      background-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="1" y2="1" stroke="rgba(0, 0, 0, 0.84)" /></svg>')
+    }
+
+    .hz {
+      background-size: 1px 1px
+    }
+
+    .ia {
+      background-position: 0 1.05em;
+      background-position: 0 calc(1em + 1px)
+    }
+
+    .ib {
+      max-width: 600px
+    }
+
+    .ic {
+      padding-bottom: 56.66666666666667%
+    }
+
+    .id {
+      line-height: 1.4
+    }
+
+    .ie {
+      margin-top: 10px
+    }
+
+    .if {
+      text-align: center
+    }
+
+    .ii {
+      line-height: 1.12
+    }
+
+    .ij {
+      letter-spacing: -0.022em
+    }
+
+    .ik {
+      font-weight: 600
+    }
+
+    .it {
+      margin-bottom: -0.28em
+    }
+
+    .iz {
+      max-width: 363px
+    }
+
+    .ja {
+      padding-bottom: 132.5068870523416%
+    }
+
+    .jb {
+      font-weight: 700
+    }
+
+    .jc {
+      max-width: 1134px
+    }
+
+    .jd {
+      padding-bottom: 56.17283950617284%
+    }
+
+    .je {
+      margin-top: 0px
+    }
+
+    .jf {
+      width: 50%
+    }
+
+    .jg {
+      margin-right: 10px
+    }
+
+    .jh:last-of-type {
+      margin-right: 0
+    }
+
+    .ji {
+      padding-bottom: 56.25%
+    }
+
+    .jj {
+      width: 200%
+    }
+
+    .jk {
+      left: calc(0% - 8px)
+    }
+
+    .jl {
+      transform: translateX(-50%)
+    }
+
+    .jm {
+      max-width: 1600px
+    }
+
+    .jn {
+      padding-bottom: 70%
+    }
+
+    .jo {
+      list-style-type: decimal
+    }
+
+    .jp {
+      margin-left: 30px
+    }
+
+    .jq {
+      padding-left: 0px
+    }
+
+    .jw {
+      max-width: 1891px
+    }
+
+    .jx {
+      padding-bottom: 76.15018508725541%
+    }
+
+    .jy {
+      padding-bottom: NaN%
+    }
+
+    .jz {
+      max-width: 1830px
+    }
+
+    .ka {
+      padding-bottom: 59.01639344262295%
+    }
+
+    .kb {
+      max-width: 1013px
+    }
+
+    .kc {
+      padding-bottom: 16.38696939782823%
+    }
+
+    .kd {
+      max-width: 1920px
+    }
+
+    .ke {
+      padding: 20px
+    }
+
+    .kf {
+      background: rgba(0, 0, 0, 0.05)
+    }
+
+    .kg {
+      overflow-x: auto
+    }
+
+    .kh {
+      line-height: 1.18
+    }
+
+    .ki {
+      font-family: Menlo, Monaco, "Courier New", Courier, monospace
+    }
+
+    .kj {
+      margin-top: -0.09em
+    }
+
+    .kk {
+      margin-bottom: -0.09em
+    }
+
+    .kl {
+      white-space: pre-wrap
+    }
+
+    .kw {
+      margin-bottom: -0.31em
+    }
+
+    .kx {
+      padding: 2px 4px
+    }
+
+    .ky {
+      font-size: 75%
+    }
+
+    .kz>strong {
+      font-family: inherit
+    }
+
+    .la {
+      max-width: 1075px
+    }
+
+    .lb {
+      padding-bottom: 174.2325581395349%
+    }
+
+    .lc {
+      width: 49.96%
+    }
+
+    .ld {
+      padding-bottom: 56.333333333333336%
+    }
+
+    .le {
+      width: 50.04%
+    }
+
+    .lf {
+      will-change: opacity
+    }
+
+    .lg {
+      width: 188px
+    }
+
+    .lh {
+      transform: translateX(406px)
+    }
+
+    .li {
+      top: calc(65px + 54px + 14px)
+    }
+
+    .ll {
+      top: calc(65px + 54px + 40px)
+    }
+
+    .ln {
+      width: 131px
+    }
+
+    .lo {
+      padding-top: 28px
+    }
+
+    .lp {
+      margin-bottom: 19px
+    }
+
+    .lq {
+      margin-left: -5px
+    }
+
+    .lr {
+      margin-right: 5px
+    }
+
+    .ls {
+      outline: 0
+    }
+
+    .lt {
+      border: 0
+    }
+
+    .lu {
+      user-select: none
+    }
+
+    .lv {
+      cursor: pointer
+    }
+
+    .lw>svg {
+      pointer-events: none
+    }
+
+    .lx:active {
+      border-style: none
+    }
+
+    .ly {
+      -webkit-user-select: none
+    }
+
+    .lz {
+      fill: rgba(0, 0, 0, 0.76)
+    }
+
+    .ma:focus {
+      fill: rgba(0, 0, 0, 0.54)
+    }
+
+    .mb:hover {
+      fill: rgba(0, 0, 0, 0.54)
+    }
+
+    .mc {
+      margin-top: 5px
+    }
+
+    .md button {
+      text-align: left
+    }
+
+    .me {
+      margin-top: 40px
+    }
+
+    .mf {
+      flex-wrap: wrap
+    }
+
+    .mg {
+      margin-top: 25px
+    }
+
+    .mh {
+      list-style-type: none
+    }
+
+    .mi {
+      margin-right: 8px
+    }
+
+    .mj {
+      margin-bottom: 8px
+    }
+
+    .mk {
+      border-radius: 3px
+    }
+
+    .ml {
+      padding: 5px 10px
+    }
+
+    .mm {
+      line-height: 22px
+    }
+
+    .mn {
+      margin-top: 15px
+    }
+
+    .mo {
+      margin-right: 16px
+    }
+
+    .mp {
+      border: 1px solid rgba(0, 0, 0, 0.1)
+    }
+
+    .mq {
+      height: 60px
+    }
+
+    .mr {
+      width: 60px
+    }
+
+    .ne:hover {
+      border-color: rgba(0, 0, 0, 0.54)
+    }
+
+    .nf:active {
+      border-style: solid
+    }
+
+    .ng {
+      z-index: 2
+    }
+
+    .ni {
+      padding-top: 32px
+    }
+
+    .nj {
+      border-top: 1px solid rgba(0, 0, 0, 0.1)
+    }
+
+    .nk {
+      margin-bottom: 25px
+    }
+
+    .nl {
+      margin-bottom: 32px
+    }
+
+    .nm {
+      min-height: 80px
+    }
+
+    .nr {
+      width: 80px
+    }
+
+    .ns {
+      height: 80px
+    }
+
+    .nt {
+      padding-left: 102px
+    }
+
+    .nv {
+      text-transform: uppercase
+    }
+
+    .nw {
+      letter-spacing: 0.05em
+    }
+
+    .nx {
+      margin-bottom: 6px
+    }
+
+    .ny {
+      font-size: 28px
+    }
+
+    .nz {
+      line-height: 36px
+    }
+
+    .oa {
+      padding: 4px 12px
+    }
+
+    .ob {
+      max-width: 555px
+    }
+
+    .oc {
+      max-width: 450px
+    }
+
+    .od {
+      font-size: 18px
+    }
+
+    .oe {
+      line-height: 24px
+    }
+
+    .og {
+      padding-top: 25px
+    }
+
+    .oh {
+      color: rgba(0, 0, 0, 0.76)
+    }
+
+    .oi {
+      opacity: 1
+    }
+
+    .oj {
+      border: 1px solid rgba(3, 168, 124, 1)
+    }
+
+    .ok {
+      margin-top: 64px
+    }
+
+    .ol {
+      background-color: rgba(0, 0, 0, 0.02)
+    }
+
+    .om {
+      padding: 60px 0
+    }
+
+    .on {
+      background-color: rgba(0, 0, 0, 0.9)
+    }
+
+    .pe {
+      padding-bottom: 48px
+    }
+
+    .pf {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.54)
+    }
+
+    .pg {
+      margin: 0 -12px
+    }
+
+    .ph {
+      margin: 0 12px
+    }
+
+    .pi {
+      flex: 1 1 0
+    }
+
+    .pj {
+      padding-bottom: 12px
+    }
+
+    .pk:hover {
+      color: rgba(255, 255, 255, 0.99)
+    }
+
+    .pl:hover {
+      fill: rgba(255, 255, 255, 0.99)
+    }
+
+    .pm:disabled {
+      color: rgba(255, 255, 255, 0.7)
+    }
+
+    .pn:disabled {
+      fill: rgba(255, 255, 255, 0.7)
+    }
+
+    .po {
+      color: rgba(255, 255, 255, 0.98)
+    }
+
+    .pp {
+      fill: rgba(255, 255, 255, 0.98)
+    }
+
+    .pq {
+      text-align: inherit
+    }
+
+    .pr {
+      font-size: 21.6px
+    }
+
+    .ps {
+      letter-spacing: -0.32px
+    }
+
+    .pt {
+      color: rgba(255, 255, 255, 0.7)
+    }
+
+    .pu {
+      fill: rgba(255, 255, 255, 0.7)
+    }
+
+    .pv {
+      text-decoration: underline
+    }
+
+    .pw {
+      padding-bottom: 8px
+    }
+
+    .px {
+      padding-top: 8px
+    }
+
+    .py {
+      width: 200px
+    }
+
+    .qa {
+      -webkit-user-select: none
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="all and (min-width: 1080px)">
+    .d {
+      display: none
+    }
+
+    .ah {
+      margin: 0 64px
+    }
+
+    .ea {
+      font-size: 40px
+    }
+
+    .eb {
+      margin-top: 0.78em
+    }
+
+    .eh {
+      line-height: 48px
+    }
+
+    .ga {
+      margin-left: 30px
+    }
+
+    .gl {
+      max-width: 1192px
+    }
+
+    .gr {
+      margin-top: 56px
+    }
+
+    .hu {
+      font-size: 21px
+    }
+
+    .hv {
+      margin-top: 2em
+    }
+
+    .ir {
+      font-size: 34px
+    }
+
+    .is {
+      margin-top: 1.95em
+    }
+
+    .iy {
+      margin-top: 0.86em
+    }
+
+    .jv {
+      margin-top: 1.05em
+    }
+
+    .ku {
+      font-size: 26px
+    }
+
+    .kv {
+      margin-top: 1.72em
+    }
+
+    .pb {
+      padding-left: 64px
+    }
+
+    .pc {
+      padding-right: 64px
+    }
+
+    .pd {
+      max-width: 1320px
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="all and (max-width: 1079.98px)">
+    .e {
+      display: none
+    }
+
+    .fz {
+      margin-left: 30px
+    }
+
+    .ig {
+      margin-left: auto
+    }
+
+    .ih {
+      text-align: center
+    }
+
+    .oy {
+      padding-left: 64px
+    }
+
+    .oz {
+      padding-right: 64px
+    }
+
+    .pa {
+      max-width: 1080px
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="all and (max-width: 903.98px)">
+    .f {
+      display: none
+    }
+
+    .fy {
+      margin-left: 30px
+    }
+
+    .ov {
+      padding-left: 48px
+    }
+
+    .ow {
+      padding-right: 48px
+    }
+
+    .ox {
+      max-width: 904px
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="all and (max-width: 727.98px)">
+    .g {
+      display: none
+    }
+
+    .am {
+      height: 56px
+    }
+
+    .an {
+      display: flex
+    }
+
+    .ay {
+      font-size: 14px
+    }
+
+    .az {
+      margin-top: 0px
+    }
+
+    .ba {
+      margin-left: 4px
+    }
+
+    .bb {
+      -webkit-line-clamp: 2
+    }
+
+    .bd {
+      display: block
+    }
+
+    .cx {
+      margin-bottom: 0px
+    }
+
+    .el {
+      margin-top: 32px
+    }
+
+    .em {
+      flex-direction: column-reverse
+    }
+
+    .fw {
+      margin-bottom: 30px
+    }
+
+    .fx {
+      margin-left: 0px
+    }
+
+    .nn {
+      margin-bottom: 24px
+    }
+
+    .no {
+      align-items: center
+    }
+
+    .np {
+      width: 102px
+    }
+
+    .nq {
+      position: relative
+    }
+
+    .nu {
+      padding-left: 0
+    }
+
+    .of {
+      margin-top: 24px
+    }
+
+    .oo {
+      padding: 32px 0
+    }
+
+    .os {
+      padding-left: 24px
+    }
+
+    .ot {
+      padding-right: 24px
+    }
+
+    .ou {
+      max-width: 728px
+    }
+
+    .pz {
+      width: 140px
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="all and (max-width: 551.98px)">
+    .h {
+      display: none
+    }
+
+    .ac {
+      margin: 0 24px
+    }
+
+    .ds {
+      font-size: 30px
+    }
+
+    .dt {
+      margin-top: 0.72em
+    }
+
+    .ed {
+      line-height: 40px
+    }
+
+    .ek {
+      margin-top: 32px
+    }
+
+    .ez {
+      margin-bottom: 0px
+    }
+
+    .fu {
+      margin-bottom: 30px
+    }
+
+    .fv {
+      margin-left: 0px
+    }
+
+    .ge {
+      margin: 0
+    }
+
+    .gf {
+      max-width: 100%
+    }
+
+    .gn {
+      margin-top: 40px
+    }
+
+    .hm {
+      font-size: 18px
+    }
+
+    .hn {
+      margin-top: 1.56em
+    }
+
+    .il {
+      margin-top: 1.2em
+    }
+
+    .iu {
+      margin-top: 0.67em
+    }
+
+    .jr {
+      margin-top: 1.34em
+    }
+
+    .km {
+      font-size: 24px
+    }
+
+    .kn {
+      margin-top: 1.23em
+    }
+
+    .op {
+      padding-left: 24px
+    }
+
+    .oq {
+      padding-right: 24px
+    }
+
+    .or {
+      max-width: 552px
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE"
+    media="all and (min-width: 904px) and (max-width: 1079.98px)">
+    .i {
+      display: none
+    }
+
+    .ag {
+      margin: 0 64px
+    }
+
+    .dy {
+      font-size: 40px
+    }
+
+    .dz {
+      margin-top: 0.78em
+    }
+
+    .eg {
+      line-height: 48px
+    }
+
+    .gk {
+      max-width: 1192px
+    }
+
+    .gq {
+      margin-top: 56px
+    }
+
+    .hs {
+      font-size: 21px
+    }
+
+    .ht {
+      margin-top: 2em
+    }
+
+    .ip {
+      font-size: 34px
+    }
+
+    .iq {
+      margin-top: 1.95em
+    }
+
+    .ix {
+      margin-top: 0.86em
+    }
+
+    .ju {
+      margin-top: 1.05em
+    }
+
+    .ks {
+      font-size: 26px
+    }
+
+    .kt {
+      margin-top: 1.72em
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE"
+    media="all and (min-width: 728px) and (max-width: 903.98px)">
+    .j {
+      display: none
+    }
+
+    .af {
+      margin: 0 48px
+    }
+
+    .dw {
+      font-size: 40px
+    }
+
+    .dx {
+      margin-top: 0.78em
+    }
+
+    .ef {
+      line-height: 48px
+    }
+
+    .gi {
+      margin: 0
+    }
+
+    .gj {
+      max-width: 100%
+    }
+
+    .gp {
+      margin-top: 56px
+    }
+
+    .hq {
+      font-size: 21px
+    }
+
+    .hr {
+      margin-top: 2em
+    }
+
+    .in {
+      font-size: 34px
+    }
+
+    .io {
+      margin-top: 1.95em
+    }
+
+    .iw {
+      margin-top: 0.86em
+    }
+
+    .jt {
+      margin-top: 1.05em
+    }
+
+    .kq {
+      font-size: 26px
+    }
+
+    .kr {
+      margin-top: 1.72em
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE"
+    media="all and (min-width: 552px) and (max-width: 727.98px)">
+    .k {
+      display: none
+    }
+
+    .ae {
+      margin: 0 24px
+    }
+
+    .du {
+      font-size: 30px
+    }
+
+    .dv {
+      margin-top: 0.72em
+    }
+
+    .ee {
+      line-height: 40px
+    }
+
+    .gg {
+      margin: 0
+    }
+
+    .gh {
+      max-width: 100%
+    }
+
+    .go {
+      margin-top: 40px
+    }
+
+    .ho {
+      font-size: 18px
+    }
+
+    .hp {
+      margin-top: 1.56em
+    }
+
+    .im {
+      margin-top: 1.2em
+    }
+
+    .iv {
+      margin-top: 0.67em
+    }
+
+    .js {
+      margin-top: 1.34em
+    }
+
+    .ko {
+      font-size: 24px
+    }
+
+    .kp {
+      margin-top: 1.23em
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="print">
+    .ab {
+      display: none
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE"
+    media="(prefers-reduced-motion: no-preference)">
+    .y {
+      transition: transform 300ms ease
+    }
+
+    .z {
+      will-change: transform
+    }
+
+    .lj {
+      transition: opacity 200ms
+    }
+
+    .ms {
+      transition: border-color 150ms ease
+    }
+
+    .mt::before {
+      background:
+        radial-gradient(circle, rgba(0, 0, 0, 0.84) 60%, transparent 70%)
+    }
+
+    .mu::before {
+      border-radius: 50%
+    }
+
+    .mv::before {
+      content: ""
+    }
+
+    .mw::before {
+      display: block
+    }
+
+    .mx::before {
+      z-index: 0
+    }
+
+    .my::before {
+      left: 0
+    }
+
+    .mz::before {
+      height: 100%
+    }
+
+    .na::before {
+      position: absolute
+    }
+
+    .nb::before {
+      top: 0
+    }
+
+    .nc::before {
+      width: 100%
+    }
+
+    .nd:hover::before {
+      animation: k1 2000ms infinite cubic-bezier(.1, .12, .25, 1)
+    }
+
+    .nh {
+      transition: fill 200ms ease
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="all and (max-width: 1230px)">
+    .lk {
+      display: none
+    }
+  </style>
+  <style type="text/css" data-fela-rehydration="441" data-fela-type="RULE" media="all and (max-width: 1198px)">
+    .lm {
+      display: none
+    }
+  </style>
+  <script type="text/javascript"
+    data-rh="true">(function (b, r, a, n, c, h, _, s, d, k) { if (!b[n] || !b[n]._q) { for (; s < _.length;)c(h, _[s++]); d = r.createElement(a); d.async = 1; d.src = "https://cdn.branch.io/branch-latest.min.js"; k = r.getElementsByTagName(a)[0]; k.parentNode.insertBefore(d, k); b[n] = h } })(window, document, "script", "branch", function (b, r) { b[r] = function () { b._q.push([r, arguments]) } }, { _q: [], _v: 1 }, "addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent".split(" "), 0);
+      branch.init('key_live_ofxXr2qTrrU9NqURK8ZwEhknBxiI6KBm', { metadata: {}, 'no_journeys': true, 'disable_exit_animation': true, 'disable_entry_animation': true, 'tracking_disabled': null }, function (err, data) { });</script>
+  <script charset="utf-8"
+    src="./Detecting animals in the backyard — practical application of deep learning._files/vendors_tracing.ce8c97b6.chunk.js"></script>
+  <script charset="utf-8"
+    src="./Detecting animals in the backyard — practical application of deep learning._files/tracing.0034d28f.chunk.js"></script>
+  <script
+    src="./Detecting animals in the backyard — practical application of deep learning._files/saved_resource"></script>
+  <link id="googleidentityservice" type="text/css" media="all" rel="stylesheet"
+    href="./Detecting animals in the backyard — practical application of deep learning._files/style">
+</head>
+
+<body>
+  <div id="root">
+    <div class="a b c">
+      <div class="d e f g h i j k"></div>
+      <script>document.domain = document.domain;</script>
+      <script>window.PARSELY = window.PARSELY || { autotrack: false }</script>
+      <nav class="r s t u v c w x y z ab" style="transform: translateY(-100%);">
+        <div class="branch-journeys-top">
+          <div class="n p">
+            
+          </div>
+        </div>
+      </nav>
+      <div class="cw al r cx am"></div>
+      <article class="meteredContent">
+        <section class="cy cz da db ak dc ct n dd"></section><span class="r"></span>
+        <div>
+          <div class="de u df dg dh di"></div>
+          <section class="dj dk dl dm dn">
+            <div class="n p">
+              <div class="ac ae af ag ah do aj ak">
+                <div>
+                  <div id="1e7e" class="dp dq ar bz dr b ds dt du dv dw dx dy dz ea eb ec">
+                    <h1 class="dr b ds ed du ee dw ef dy eg ea eh ar">Detecting animals in the backyard — practical
+                      application of deep learning.</h1>
+                  </div>
+                  <div class="ei">
+                    <div class="n ej ek el em">
+                      <div class="o n">
+                        <div><a rel="noopener"
+                            href="https://medium.com/@gaiar?source=post_page-----c030d3263ba8----------------------">
+                            <div class="en eo ep">
+                              <div class="ch n eq o p de er es et eu ev di"><svg width="57" height="57"
+                                  viewBox="0 0 57 57">
+                                  <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M28.5 1.2A27.45 27.45 0 0 0 4.06 15.82L3 15.27A28.65 28.65 0 0 1 28.5 0C39.64 0 49.29 6.2 54 15.27l-1.06.55A27.45 27.45 0 0 0 28.5 1.2zM4.06 41.18A27.45 27.45 0 0 0 28.5 55.8a27.45 27.45 0 0 0 24.44-14.62l1.06.55A28.65 28.65 0 0 1 28.5 57 28.65 28.65 0 0 1 3 41.73l1.06-.55z">
+                                  </path>
+                                </svg></div><img alt="Gaiar Baimuratov" class="r ew ep eo"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/0_KpjuRIt8b_BHrWRB.jpg"
+                                width="48" height="48">
+                            </div>
+                          </a></div>
+                        <div class="ex ak r">
+                          <div class="n">
+                            <div style="flex:1"><span class="by b bz ca cb cc r ar q">
+                                <div class="ey n o ez"><span class="by fa fb ca ax fc fd au av aw ar"><a
+                                      class="bi bj bk bl bm bn bo bp bq br fe bu bv bw bx" rel="noopener"
+                                      href="https://medium.com/@gaiar?source=post_page-----c030d3263ba8----------------------">Gaiar
+                                      Baimuratov</a></span>
+                                  <div class="ff r bh h"><button
+                                      class="fg ar q cn fh fi fj fk br bw fl fm fn fo fp fq cq by b bz fr fs cc cr cs ct cu cv bu">Follow</button>
+                                  </div>
+                                </div>
+                              </span></div>
+                          </div><span class="by b bz ca cb cc r cd ce"><span class="by fa fb ca ax fc fd au av aw cd">
+                              <div><a class="bi bj bk bl bm bn bo bp bq br fe bu bv bw bx" rel="noopener"
+                                  href="https://medium.com/@gaiar/detecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8?source=post_page-----c030d3263ba8----------------------">Feb
+                                  13</a> <!-- -->·
+                                <!-- -->
+                                <!-- -->10
+                                <!-- --> min read<span style="padding-left:4px"><svg class="star-15px_svg__svgIcon-use"
+                                    width="15" height="15" viewBox="0 0 15 15" style="margin-top:-2px">
+                                    <path
+                                      d="M7.44 2.32c.03-.1.09-.1.12 0l1.2 3.53a.29.29 0 0 0 .26.2h3.88c.11 0 .13.04.04.1L9.8 8.33a.27.27 0 0 0-.1.29l1.2 3.53c.03.1-.01.13-.1.07l-3.14-2.18a.3.3 0 0 0-.32 0L4.2 12.22c-.1.06-.14.03-.1-.07l1.2-3.53a.27.27 0 0 0-.1-.3L2.06 6.16c-.1-.06-.07-.12.03-.12h3.89a.29.29 0 0 0 .26-.19l1.2-3.52z">
+                                    </path>
+                                  </svg></span></div>
+                            </span></span>
+                        </div>
+                      </div>
+                      <div class="n ft fu fv fw fx fy fz ga ab">
+                        <div class="n o">
+                          <div class="gb r bh"><a
+                              href="https://medium.com/p/c030d3263ba8/share/twitter?source=post_actions_header---------------------------"
+                              class="bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx" target="_blank"
+                              rel="noopener nofollow"><svg width="29" height="29" class="q">
+                                <path
+                                  d="M22.05 7.54a4.47 4.47 0 0 0-3.3-1.46 4.53 4.53 0 0 0-4.53 4.53c0 .35.04.7.08 1.05A12.9 12.9 0 0 1 5 6.89a5.1 5.1 0 0 0-.65 2.26c.03 1.6.83 2.99 2.02 3.79a4.3 4.3 0 0 1-2.02-.57v.08a4.55 4.55 0 0 0 3.63 4.44c-.4.08-.8.13-1.21.16l-.81-.08a4.54 4.54 0 0 0 4.2 3.15 9.56 9.56 0 0 1-5.66 1.94l-1.05-.08c2 1.27 4.38 2.02 6.94 2.02 8.3 0 12.86-6.9 12.84-12.85.02-.24 0-.43 0-.65a8.68 8.68 0 0 0 2.26-2.34c-.82.38-1.7.62-2.6.72a4.37 4.37 0 0 0 1.95-2.51c-.84.53-1.81.9-2.83 1.13z">
+                                </path>
+                              </svg></a></div>
+                          <div class="gb r bh"><a
+                              href="https://medium.com/p/c030d3263ba8/share/facebook?source=post_actions_header---------------------------"
+                              class="bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx" target="_blank"
+                              rel="noopener nofollow"><svg width="29" height="29" class="q">
+                                <path
+                                  d="M23.2 5H5.8a.8.8 0 0 0-.8.8V23.2c0 .44.35.8.8.8h9.3v-7.13h-2.38V13.9h2.38v-2.38c0-2.45 1.55-3.66 3.74-3.66 1.05 0 1.95.08 2.2.11v2.57h-1.5c-1.2 0-1.48.57-1.48 1.4v1.96h2.97l-.6 2.97h-2.37l.05 7.12h5.1a.8.8 0 0 0 .79-.8V5.8a.8.8 0 0 0-.8-.79">
+                                </path>
+                              </svg></a></div>
+                          <div class="gc r ao"><a
+                              href="https://medium.com/m/signin?operation=register&amp;redirect=https%3A%2F%2Fmedium.com%2F%40gaiar%2Fdetecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8&amp;source=post_actions_header--------------------------bookmark_sidebar-"
+                              class="bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx" rel="noopener"><svg width="25"
+                                height="25" viewBox="0 0 25 25">
+                                <path
+                                  d="M19 6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14.66h.01c.01.1.05.2.12.28a.5.5 0 0 0 .7.03l5.67-4.12 5.66 4.13a.5.5 0 0 0 .71-.03.5.5 0 0 0 .12-.29H19V6zm-6.84 9.97L7 19.64V6a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v13.64l-5.16-3.67a.49.49 0 0 0-.68 0z"
+                                  fill-rule="evenodd"></path>
+                              </svg></a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="gd">
+              <div class="n p">
+                <div class="ge gf gg gh gi gj ag gk ah gl aj ak">
+                  <figure class="gn go gp gq gr gd gs gt paragraph-image">
+                    <div class="gu gv en gw ak">
+                      <div class="da db gm">
+                        <div class="hc r en hd">
+                          <div class="he r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_xA0v-P_aMXw-1aOFwgFkKg.png"
+                                width="3000" height="1055" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="3000" height="1055" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_xA0v-P_aMXw-1aOFwgFkKg(1).png"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/6000/1*xA0v-P_aMXw-1aOFwgFkKg.png"
+                                width="3000" height="1055" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="n p">
+              <div class="ac ae af ag ah do aj ak">
+                <p id="5067" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  This post is based on my experience of applying existing deep learning techniques in real (and rural)
+                  life situations.</p>
+                <p id="abd8" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  I’m presenting how you can apply deep learning techniques to practice and still get fun from that.</p>
+                <p id="cb8d" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  The full code you can get from <a href="https://github.com/gaiar/animal-detector"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">my Github repo</a>.</p>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="da db ib">
+                    <div class="hc r en hd">
+                      <div class="ic r">
+                        <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_p8i-RHtIuaQEQbNvSLx9Bg.gif"
+                            width="600" height="340" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                          width="600" height="340" role="presentation"
+                          src="./Detecting animals in the backyard — practical application of deep learning._files/1_p8i-RHtIuaQEQbNvSLx9Bg(1).gif"><noscript><img
+                            class="de t u gz ak" src="https://miro.medium.com/max/1200/1*p8i-RHtIuaQEQbNvSLx9Bg.gif"
+                            width="600" height="340" role="presentation" /></noscript>
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Raccoon spotted
+                    in the backyard</figcaption>
+                </figure>
+                <h1 id="48ed" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  Motivation</h1>
+                <p id="94da" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  As you may have already understood from my previous posts, I’m kind of a “nature-lover,” and I was
+                  always wondering what is happening in our country house backyard when we are not there. Are rumors of
+                  foxes wandering all over the place or raccoons walking on the roofs are real or just stories?</p>
+                <p id="24e6" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  Keeping that in mind, I’ve installed night-vision motion-activated cameras pointing at our backyard
+                  and started capturing nocturnal species visiting us.</p>
+                <p id="1f87" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  First, I was reviewing recording myself and discovered that life there still goes on even when
+                  everyone is asleep. Camera proofed that foxes and raccoons are quite frequent visitors and knowing
+                  that I wanted to keep track of them. But I won’t be able to go through recording myself every night
+                  and pick only interesting ones.</p>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="da db iz">
+                    <div class="hc r en hd">
+                      <div class="ja r">
+                        <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_lDxD4eBeMy_jRixdHh5tpQ.png"
+                            width="363" height="481" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                          width="363" height="481" role="presentation"
+                          src="./Detecting animals in the backyard — practical application of deep learning._files/1_lDxD4eBeMy_jRixdHh5tpQ(1).png"><noscript><img
+                            class="de t u gz ak" src="https://miro.medium.com/max/726/1*lDxD4eBeMy_jRixdHh5tpQ.png"
+                            width="363" height="481" role="presentation" /></noscript>
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Half a year video
+                    capture from one camera. Lots of false positives because of tree movements.</figcaption>
+                </figure>
+                <p id="61e5" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  So I needed an automated system to distinguish false-positives as trees moving because of the wind or
+                  rapid light conditions changes from real animal movements.</p>
+                <p id="84ae" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  And I’ve decided to check if it is possible to get an advantage from available open-source
+                  technologies without being an expert in that and without spending a fortune on any cloud solution and
+                  hardware.</p>
+                <p id="ba75" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  <strong class="hl jb">Where are these animals coming from?</strong></p>
+                <p id="b8e3" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  About a third of the Brandenburg state is taken by 15 nature protected areas (1 national park, three
+                  biosphere reserves, and 11 nature parks)</p>
+                <p id="c172" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  On <a href="https://www.inaturalist.org/places/29473#taxon=40151" class="bi cv hx hy hz ia"
+                    target="_blank" rel="noopener nofollow">Brandeburgs iNaturalist page</a> you can count 23 different
+                  mammal species, and at least 5 of them I was able to capture in my backyard.</p>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="gu gv en gw ak">
+                    <div class="da db jc">
+                      <div class="hc r en hd">
+                        <div class="jd r">
+                          <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_CI1Bl7FXi5HcFju3w66QYA.png"
+                              width="1134" height="637" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                            width="1134" height="637" role="presentation"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_CI1Bl7FXi5HcFju3w66QYA(1).png"><noscript><img
+                              class="de t u gz ak" src="https://miro.medium.com/max/2268/1*CI1Bl7FXi5HcFju3w66QYA.png"
+                              width="1134" height="637" role="presentation" /></noscript>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Grey heron landed
+                    in the backyard.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="gd">
+              <div class="n p">
+                <div class="ge gf gg gh gi gj ag gk ah gl aj ak">
+                  <div class="gn go gp gq gr n eq">
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ji r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_Y_Rzk0k0X9bQzwXI56XmeA.gif"
+                                width="800" height="450" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="800" height="450" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_Y_Rzk0k0X9bQzwXI56XmeA(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1600/1*Y_Rzk0k0X9bQzwXI56XmeA.gif"
+                                width="800" height="450" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </figure>
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ji r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_JYANIllWN6D081qK9glU8g.gif"
+                                width="800" height="450" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="800" height="450" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_JYANIllWN6D081qK9glU8g(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1600/1*JYANIllWN6D081qK9glU8g.gif"
+                                width="800" height="450" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                      <figcaption class="cd fb id ie if dc da db ig ih by fa jj en jk jl" data-selectable-paragraph="">
+                        At least one of them is a squirrel. Or both?</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n p">
+              <div class="ac ae af ag ah do aj ak">
+                <h1 id="6aaa" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  How does it work?</h1>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="gu gv en gw ak">
+                    <div class="da db jm">
+                      <div class="hc r en hd">
+                        <div class="jn r">
+                          <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_XlDFP5GKYOKg4CtX5iVJ-Q.png"
+                              width="1600" height="1120" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                            width="1600" height="1120" role="presentation"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_XlDFP5GKYOKg4CtX5iVJ-Q(1).png"><noscript><img
+                              class="de t u gz ak" src="https://miro.medium.com/max/3200/1*XlDFP5GKYOKg4CtX5iVJ-Q.png"
+                              width="1600" height="1120" role="presentation" /></noscript>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+                <ol class="">
+                  <li id="9869" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Capture:</strong> IP outdoor camera captures the
+                    motion and saves the video</li>
+                  <li id="1557" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Store:</strong> Small bash running on Raspberry
+                    Pi 3 downloads all new videos via FTP and saves them to NAS storage</li>
+                  <li id="c553" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Analyze:</strong> Python application with GPU
+                    accelerated Tensorflow runs inference on incoming video files and generates new videos with
+                    detections if there are any</li>
+                  <li id="5649" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Share:</strong> Python application updates
+                    Telegram bot and sends new detection videos</li>
+                </ol>
+                <p id="112d" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  In the next part, I’m going through every step and sharing my discoveries with you.</p>
+                <h1 id="c569" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  Capture</h1>
+                <p id="c8aa" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  For capturing motion, I’m using two Xiaomi/Mi Outdoor Camera with the hacked firmware extending camera
+                  functionality. It is quite a lovely and affordable camera you can use outdoor without any fear of
+                  breaking it.</p>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="gu gv en gw ak">
+                    <div class="da db jw">
+                      <div class="hc r en hd">
+                        <div class="jx r">
+                          <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_-y1xHA3oiS0UTmZgfBrNuA.jpeg"
+                              width="1891" height="1440" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                            width="1891" height="1440" role="presentation"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_-y1xHA3oiS0UTmZgfBrNuA(1).jpeg"><noscript><img
+                              class="de t u gz ak" src="https://miro.medium.com/max/3782/1*-y1xHA3oiS0UTmZgfBrNuA.jpeg"
+                              width="1891" height="1440" role="presentation" /></noscript>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Camera pointing
+                    to the backyard</figcaption>
+                </figure>
+                <p id="52b0" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  <a href="https://github.com/TheCrypt0/yi-hack-v4" class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">Hacked version of firmware</a> adds needed functionality like FTP server and
+                  RTSP streams for integrating with software like Home Assistant</p>
+                <h1 id="1cc7" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  Store</h1>
+                <p id="b81e" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  That is a straightforward part.</p>
+                <p id="7c46" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  On my local Raspberry Pi, I’ve added a small bash script to cron to download all new video files and
+                  store them to USB “Lots-Of-TBs” drive.</p>
+                <p id="942a" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  I’ve adapted a script using instructions from here: <a
+                    href="https://askubuntu.com/questions/758640/how-to-automatically-sync-the-contents-of-a-local-folder-with-the-contents-of-a"
+                    class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">https://askubuntu.com/questions/758640/how-to-automatically-sync-the-contents-of-a-local-folder-with-the-contents-of-a</a>
+                </p>
+                <figure class="gn go gp gq gr gd">
+                  <div class="hc r en">
+                    <div class="rj r"><iframe
+                        src="./Detecting animals in the backyard — practical application of deep learning._files/059efb05ca6045032567a6c7ebafa915.html"
+                        allowfullscreen="" frameborder="0" height="410" width="680" title="upload.sh"
+                        class="de t u gz ak" scrolling="auto"></iframe></div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa">Cron script for pulling videos from the camera
+                  </figcaption>
+                </figure>
+                <h1 id="3645" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  Analyze</h1>
+                <p id="5a93" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  All incoming files are processed via OpenCV and analyzed with Tensorflow</p>
+                <p id="4c57" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  That was the part that needs proper tuning of the software according to the hardware. As you may
+                  understand, in the countryside, you won’t be keeping the beefy server running, so you need to squeeze
+                  the most from the equipment you can afford.</p>
+              </div>
+            </div>
+            <div class="gd">
+              <div class="n p">
+                <div class="ge gf gg gh gi gj ag gk ah gl aj ak">
+                  <figure class="gn go gp gq gr gd gs gt paragraph-image">
+                    <div class="gu gv en gw ak">
+                      <div class="da db jz">
+                        <div class="hc r en hd">
+                          <div class="ka r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_vqRNGORhVS7MLLQ3DmRsvw.png"
+                                width="1830" height="1080" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="1830" height="1080" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_vqRNGORhVS7MLLQ3DmRsvw(1).png"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/3660/1*vqRNGORhVS7MLLQ3DmRsvw.png"
+                                width="1830" height="1080" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Beginning of
+                      the journey</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="n p">
+              <div class="ac ae af ag ah do aj ak">
+                <ol class="">
+                  <li id="c562" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw jo jp jq"
+                    data-selectable-paragraph="">Install OpenCV</li>
+                  <li id="7aea" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Multiprocessing VideoReader</li>
+                  <li id="9e55" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Tensorflow model Megadetector</li>
+                  <li id="9df6" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Batches</li>
+                  <li id="cfb3" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Possible optimizations: Graph Optimize, TensorRT</li>
+                </ol>
+                <p id="fc2c" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  As I didn’t have data, resources, and time to train my own animal detection neural network, I searched
+                  the net for what was available today. And I’ve found that the task even with state-of-the-art neural
+                  networks and data gathered all the world is not so simple as it seemed.</p>
+                <p id="ed33" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  Of course, there are products and researches doing animal detection. Still, with one main difference
+                  from what I was looking for — they are detecting creatures from photo cameras or smartphone cameras,
+                  and such shots differ by color, shapes, and quality from what you are getting with motion detection
+                  cameras.</p>
+                <p id="00cd" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  But, whatever. There are still projects doing the same as my goal was. My searches led me to the <a
+                    href="https://github.com/microsoft/CameraTraps" class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">CameraTraps project from Microsoft</a>. As I understood, they are building
+                  <a href="https://www.microsoft.com/en-us/ai/ai-for-earth?activetab=pivot1:primaryr8"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">Image Recognition API</a> using
+                  data collected from different Wild Life Cameras all over the world. As a result of that, they
+                  open-sourced the pre-trained model for detecting, if “animal” or “human”, is present on the image,
+                  called “<a href="http://dmorris.net/misc/cameratraps/ai4e_camera_traps_overview/"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">MegaDetector</a>.”</p>
+                <p id="ae7d" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  The main limitation of that model is coming from the name of the model. It is only a “Detector,” but
+                  not a “Classifier.”</p>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="gu gv en gw ak">
+                    <div class="da db kb">
+                      <div class="hc r en hd">
+                        <div class="kc r">
+                          <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_s8J6oRdsSKhx98MuTLhrlw.png"
+                              width="1013" height="166" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                            width="1013" height="166" role="presentation"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_s8J6oRdsSKhx98MuTLhrlw(1).png"><noscript><img
+                              class="de t u gz ak" src="https://miro.medium.com/max/2026/1*s8J6oRdsSKhx98MuTLhrlw.png"
+                              width="1013" height="166" role="presentation" /></noscript>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Statement from
+                    Microsoft about detectors and classifiers</figcaption>
+                </figure>
+                <p id="7063" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  Even considered limitations like that, such an approach did fit me perfectly.</p>
+                <p id="130e" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  The model is trained to detect three different classes:</p>
+                <ol class="">
+                  <li id="8994" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw jo jp jq"
+                    data-selectable-paragraph="">Animal</li>
+                  <li id="de85" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Person</li>
+                  <li id="afe9" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Vehicle</li>
+                </ol>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="gu gv en gw ak">
+                    <div class="da db kd">
+                      <div class="hc r en hd">
+                        <div class="ji r">
+                          <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_p_RWxiL6-F06Oi9f2Tym5A.png"
+                              width="1920" height="1080" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                            width="1920" height="1080" role="presentation"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_p_RWxiL6-F06Oi9f2Tym5A(1).png"><noscript><img
+                              class="de t u gz ak" src="https://miro.medium.com/max/3840/1*p_RWxiL6-F06Oi9f2Tym5A.png"
+                              width="1920" height="1080" role="presentation" /></noscript>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Racoon identified
+                    with “Animal” class</figcaption>
+                </figure>
+                <p id="479b" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  In most of the cases, you’ll find in various blog posts when speaking of video object detection, the
+                  real-time video will be described. My case was a bit different — as an input, I had a huge pile of
+                  video files produced by the camera, and as output, I also wanted video files.</p>
+                <p id="37fa" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  For reading and writing video files in Python today as standard-de-facto considered OpenCV library. I
+                  also find it my favorite image manipulation package.</p>
+                <p id="7b33" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  The logic of running inference on video file is quite straightforward:</p>
+                <ol class="">
+                  <li id="760f" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Read:</strong> Get a frame from the video</li>
+                  <li id="b740" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Detect:</strong> Run inference on the image</li>
+                  <li id="453c" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Write:</strong> Save a video frame to the new
+                    file with detection if there are any.</li>
+                  <li id="5656" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph=""><strong class="hl jb">Repeat: </strong>Run steps 1–3 until the end of
+                    the video</li>
+                </ol>
+                <p id="b858" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  It can be implemented with this code sample</p>
+                <figure class="gn go gp gq gr gd">
+                  <div class="hc r en">
+                    <div class="rk r"><iframe
+                        src="./Detecting animals in the backyard — practical application of deep learning._files/6e905d97b55ab5daa43277395c1386d0.html"
+                        allowfullscreen="" frameborder="0" height="1532" width="680" title="opencv_inference.py"
+                        class="de t u gz ak" scrolling="auto"></iframe></div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa">Tensorflow object detection with OpenCV
+                    VideoReader</figcaption>
+                </figure>
+                <p id="9fc6" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  Even though such a straightforward approach has several bottlenecks as the same thread reading and
+                  writing, it works. So, if you are looking for a code to try your model on a video, check <a
+                    href="https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/camera.html"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">that script</a>.</p>
+                <p id="9de4" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  It took me around 10 minutes to process a FullHD one-minute 10 FPS video file.</p>
+                <pre
+                  class="gn go gp gq gr ke kf kg"><span id="f88d" class="kh ij ar bz ki b fb kj kk r kl" data-selectable-paragraph="">Detection took 9 minutes and 18.18 seconds. Average detection time per frame: 0.93 seconds</span></pre>
+                <p id="e935" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  But you can find many tutorials like that — telling you how to run a vanilla OpenCV/Tensorflow
+                  inference. The challenging part is how to make that code run continuously and with nice performance.
+                </p>
+                <h2 id="e515" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  I/O blocks</h2>
+                <p id="2e58" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  With the code provided, reading frames, detecting, and writing back are happening in the same loop,
+                  and it means sooner or later one of the operations will become a bottleneck, for example, reading
+                  video files from “not-very-stable” network storage.</p>
+                <p id="864e" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  To get rid of that part, I’ve used instructions from a fantastic computer vision blogger <a
+                    href="https://www.pyimagesearch.com/author/adrian/" class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">Adrian Rosebrock</a> and his library <a
+                    href="https://github.com/jrosebr1/imutils" class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">imutils</a>. He is offering splitting reading frames and processing frames
+                  into multiple threads, and such an approach gave me a prepopulated queue of frames ready to be
+                  processed.</p>
+                <figure class="gn go gp gq gr gd">
+                  <div class="hc r en">
+                    <div class="rl r"><iframe
+                        src="./Detecting animals in the backyard — practical application of deep learning._files/1c1cef5e9f8313263509d680f6f0520d.html"
+                        allowfullscreen="" frameborder="0" height="219" width="680"
+                        title="Full version here: https://gist.github.com/gaiar/9cac5c741ff3c8bafe79dfa275456709"
+                        class="de t u gz ak" scrolling="auto"></iframe></div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa"><a
+                      href="https://gist.github.com/gaiar/9cac5c741ff3c8bafe79dfa275456709" class="bi cv hx hy hz ia"
+                      target="_blank" rel="noopener nofollow">Modified FileVideoStream</a> from Adrian Rosebrock
+                  </figcaption>
+                </figure>
+                <p id="3753" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  It won’t impact much on inference time, but it helps with slow drives, which are often used for video
+                  storage.</p>
+                <h2 id="1783" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  Optimization: Graph analysis</h2>
+                <p id="f20c" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  Another part, I’ve heard about was optimizing models for deployment. I’ve followed a guide discovered
+                  here: <a
+                    href="https://towardsdatascience.com/optimize-nvidia-gpu-performance-for-efficient-model-inference-f3e9874e9fdc"
+                    class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener">https://towardsdatascience.com/optimize-nvidia-gpu-performance-for-efficient-model-inference-f3e9874e9fdc</a>
+                  and managed to achieve some improvement by assigning non-GPU supported layers to be processed on CPU.
+                </p>
+                <pre
+                  class="gn go gp gq gr ke kf kg"><span id="e5c8" class="kh ij ar bz ki b fb kj kk r kl" data-selectable-paragraph="">[INFO] :: Detection took 8 minutes and 39.91 seconds. Average detection time per frame: 0.86 seconds</span></pre>
+                <h2 id="0e20" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  Batch inference</h2>
+                <p id="8885" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  Based on my previous experience, one of the bottleneck parts in deep learning training was data
+                  transfer from disk to GPU, and to minimize that time were used so-called “batches” when GPU got
+                  several images at once.</p>
+                <p id="1a39" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">I
+                  wondered if it was possible to do the same batch processing on inference. And luckily, it was possible
+                  according to <a
+                    href="https://stackoverflow.com/questions/48110514/how-to-batch-multiple-videoframes-before-run-tensorflow-inference-session"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">StackOverflow</a> answer.</p>
+                <p id="d7f9" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">I
+                  just needed to find the largest acceptable batch size and pass array or frames for inference. For
+                  that, I’ve extended <code class="hd kx ky kz ki b">FileVideoStream</code> class with <a
+                    href="https://gist.github.com/gaiar/9cac5c741ff3c8bafe79dfa275456709#file-filevideostream-py-L84"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">batch functionality</a></p>
+                <pre
+                  class="gn go gp gq gr ke kf kg"><span id="4693" class="kh ij ar bz ki b fb kj kk r kl" data-selectable-paragraph="">[INFO] :: Detection took 8 minutes and 1.12 second. Average detection time per frame: 0.8 seconds</span></pre>
+                <h2 id="5110" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  Optimization: Compiling from sources</h2>
+                <p id="3bbc" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  Another important part, when we are talking about running heavy, time-consuming computations, is
+                  squeezing the most from the hardware.</p>
+                <p id="7830" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  One of the most straightforward approaches is using machine-type optimized packages. The message every
+                  Tensorflow user has seen:</p>
+                <pre
+                  class="gn go gp gq gr ke kf kg"><span id="486a" class="kh ij ar bz ki b fb kj kk r kl" data-selectable-paragraph="">tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2</span></pre>
+                <p id="a76b" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  It means that Tensorflow is underutilizing hardware because of ignoring built-in CPU optimizations.
+                  And the reason for that is because the generic package was installed, which will work on any type of
+                  x86 machine.</p>
+                <p id="be84" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  One way of increasing its performance is to install optimized package from 3rd parties like <a
+                    href="https://github.com/lakshayg/tensorflow-build" class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">https://github.com/lakshayg/tensorflow-build</a>, <a
+                    href="https://github.com/mind/wheels" class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">https://github.com/mind/wheels</a> or <a
+                    href="https://github.com/yaroslavvb/tensorflow-community-wheels/issues" class="bi cv hx hy hz ia"
+                    target="_blank"
+                    rel="noopener nofollow">https://github.com/yaroslavvb/tensorflow-community-wheels/issues</a></p>
+                <p id="d75d" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  Another way is to follow instructions from Google and build the package from source <a
+                    href="https://www.tensorflow.org/install/source#tensorflow_1x" class="bi cv hx hy hz ia"
+                    target="_blank" rel="noopener nofollow">https://www.tensorflow.org/install/source#tensorflow_1x</a>.
+                  But consider that it is could a bit difficult if you didn’t have an experience before and it is quite
+                  a time and RAM consuming process (last time it took 3.5 hours on my six-core CPU).</p>
+                <p id="0605" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  The same comes with OpenCV, but that is an even more complex topic, so I’m not covering it here. There
+                  are handy guides by <a
+                    href="https://www.pyimagesearch.com/2018/05/28/ubuntu-18-04-how-to-install-opencv/"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">Adrian Rosebrock</a>, if you are
+                  interested in that topic, please follow them.</p>
+                <h1 id="5bfa" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  Share</h1>
+                <p id="85ac" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  Small Python application waiting for the incoming videos with detections. As the video arrives, it
+                  updates my Telegram channel. I’ve used my <a
+                    href="https://github.com/gaiar/xiaomi-video-watcher/tree/dev" class="bi cv hx hy hz ia"
+                    target="_blank" rel="noopener nofollow">previous project</a>, which was resending incoming videos to
+                  my telegram channel.</p>
+                <p id="d666" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  The app is configured like that and continuously monitoring a folder for the new files using <a
+                    href="https://pypi.org/project/watchdog/" class="bi cv hx hy hz ia" target="_blank"
+                    rel="noopener nofollow">watchdog library</a></p>
+                <pre
+                  class="gn go gp gq gr ke kf kg"><span id="6290" class="kh ij ar bz ki b fb kj kk r kl" data-selectable-paragraph="">{<br>    "xiaomi_video_watch_dir" : PATH_TO_WATCH,<br>    "xiaomi_video_temp_dir" : PATH_TO_STORE_TEMP_FILES,<br>    "xiaomi_video_gif_dir" : PATH_WITH_OUTPUT_GIFS,<br>    "tg_key" : TELEGRAM_KEY<br>}</span></pre>
+                <figure class="gn go gp gq gr gd da db paragraph-image">
+                  <div class="gu gv en gw ak">
+                    <div class="da db la">
+                      <div class="hc r en hd">
+                        <div class="lb r">
+                          <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_3H8qzvL4oNGe_2VXE2Et9w.jpeg"
+                              width="1075" height="1873" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                            width="1075" height="1873" role="presentation"
+                            src="./Detecting animals in the backyard — practical application of deep learning._files/1_3H8qzvL4oNGe_2VXE2Et9w(1).jpeg"><noscript><img
+                              class="de t u gz ak" src="https://miro.medium.com/max/2150/1*3H8qzvL4oNGe_2VXE2Et9w.jpeg"
+                              width="1075" height="1873" role="presentation" /></noscript>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa" data-selectable-paragraph="">Initial Telegram
+                    group version</figcaption>
+                </figure>
+                <h1 id="9a73" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  What didn’t work out?</h1>
+                <p id="7619" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  This project brought me lots of new learnings and even though I’ve managed to reach my final goal,
+                  I’ve gone through some failed trials. And I think that is one of the most important parts of each
+                  project.</p>
+                <h2 id="fc6b" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  Image Enhancing</h2>
+                <p id="c08f" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  During my research, I’ve come across <a class="bi cv hx hy hz ia" target="_blank" rel="noopener"
+                    href="https://medium.com/konvergen/experience-with-iwildcam-2019-kaggle-competition-dd29ed9db3ba">several
+                    reports</a> from <a href="https://www.kaggle.com/c/iwildcam-2019-fgvc6" class="bi cv hx hy hz ia"
+                    target="_blank" rel="noopener nofollow">iWildCam Kaggle competition</a> participants. They mentioned
+                  quite often about applying the <a
+                    href="https://www.kaggle.com/cdm9804/histogram-equalization-to-improve-contrast"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">CLAHE algorithm</a> to input
+                  images for Histogram Equalization. I’ve tried the mentioned algorithm and several others, but with no
+                  success. Applying image modification dropped the number of successful detections. But to be honest,
+                  night camera images looked more sharp and crisp.</p>
+                <pre
+                  class="gn go gp gq gr ke kf kg"><span id="1d2f" class="kh ij ar bz ki b fb kj kk r kl" data-selectable-paragraph=""><strong class="ki jb">def</strong> enchance_image(frame):<br>   temp_img = frame<br>   img_wb = wb.balanceWhite(temp_img)<br>   img_lab = cv.cvtColor(img_wb, cv.COLOR_BGR2Lab)<br>   l, a, b = cv.split(img_lab)<br>   img_l = clahe.apply(l)<br>   img_clahe = cv.merge((img_l, a, b))<br>   return cv.cvtColor(img_clahe, cv.COLOR_Lab2BGR)</span></pre>
+              </div>
+            </div>
+            <div class="gd">
+              <div class="n p">
+                <div class="ge gf gg gh gi gj ag gk ah gl aj ak">
+                  <div class="gn go gp gq gr n eq">
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ic r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_nRlylFBynp92vmIrA8cw0A.gif"
+                                width="600" height="340" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="600" height="340" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_nRlylFBynp92vmIrA8cw0A(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1200/1*nRlylFBynp92vmIrA8cw0A.gif"
+                                width="600" height="340" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </figure>
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ic r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_1yTu7bEcmgb2TEbPNPMvIg.gif"
+                                width="600" height="340" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="600" height="340" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_1yTu7bEcmgb2TEbPNPMvIg(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1200/1*1yTu7bEcmgb2TEbPNPMvIg.gif"
+                                width="600" height="340" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                      <figcaption class="cd fb id ie if dc da db ig ih by fa jj en jk jl" data-selectable-paragraph="">
+                        Left: CLAHE applied version. Right: Now enhancement</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="n p">
+              <div class="ac ae af ag ah do aj ak">
+                <h2 id="c354" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  Optimization: TensorRT</h2>
+                <p id="01a8" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  For some reason, I couldn’t follow a guide for building the TensorRT engine, but plain <a
+                    href="https://docs.nvidia.com/deeplearning/frameworks/tf-trt-user-guide/index.html"
+                    class="bi cv hx hy hz ia" target="_blank" rel="noopener nofollow">TF-TensorRT documentation</a>
+                  worked quite well.</p>
+                <figure class="gn go gp gq gr gd">
+                  <div class="hc r en">
+                    <div class="rj r"><iframe
+                        src="./Detecting animals in the backyard — practical application of deep learning._files/290a076eac0553a78342f4e05b22c188.html"
+                        allowfullscreen="" frameborder="0" height="410" width="680"
+                        title="TF-TRT 1.x Workflow With A SavedModel" class="de t u gz ak" scrolling="auto"></iframe>
+                    </div>
+                  </div>
+                  <figcaption class="cd fb id ie if dc da db ig ih by fa">TF-TRT model optimization</figcaption>
+                </figure>
+                <p id="22e3" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  Even with the successfully ended optimization, no inference speedup happened.</p>
+                <pre
+                  class="gn go gp gq gr ke kf kg"><span id="c9ce" class="kh ij ar bz ki b fb kj kk r kl" data-selectable-paragraph="">[INFO] :: Detection took 8 minutes and 59.68 seconds. Average detection time per frame: 0.9 seconds</span></pre>
+                <p id="6958" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  My thoughts, that model architecture is too deep for automatic TensorRT engine building. But who
+                  knows?</p>
+                <h2 id="7859" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  Magic speedup</h2>
+                <p id="1c9d" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  Another idea I’ve had lots of expectations was getting significant speedup from model and graph
+                  optimizations. I was expecting getting results close to documentation and YouTube instructions (3x-4x
+                  speedup), but I got only something around (1.3x–1.5x), which is of course much better than nothing.
+                </p>
+                <p id="ee65" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">
+                  My thoughts on why speedup wasn’t such dramatic, are following:</p>
+                <ol class="">
+                  <li id="560d" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw jo jp jq"
+                    data-selectable-paragraph="">GPU is a bottleneck — not having enough VRAM doesn’t give much room for
+                    speedy computations.</li>
+                  <li id="8b92" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">The model architecture used for MegaDetector is very complex (Faster
+                    RCNN) and doesn’t fit for automatic optimizations</li>
+                  <li id="08cc" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">I did something wrong ¯\_(ツ)_/¯. But at least, I’ve tried.</li>
+                </ol>
+                <h2 id="f84f" class="kh ij ar bz by ik km kn ko kp kq kr ks kt ku kv kw" data-selectable-paragraph="">
+                  Full CPU and GPU utilization</h2>
+                <p id="b5df" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  Another part that I didn’t like much was CPU utilization. While GPU was choking up by computations,
+                  CPU consumption was around 30%. I’ve tried to give it some extra work with prefetching video frames,
+                  but still, it didn’t take a significant part in the inference process.</p>
+                <p id="9f31" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">I
+                  was hoping for some parallelizing computations from the Tensorflow library but it seems it was the
+                  most what I could have achieved.</p>
+                <p id="08e0" class="hj hk ar bz hl b hm hn ho hp hq hr hs ht hu hv hw dj" data-selectable-paragraph="">I
+                  had one idea of having two parallel Tensorflow sessions — one for GPU and for CPU, but that too much
+                  work to be done.</p>
+                <h1 id="123a" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  Future plans</h1>
+                <ol class="">
+                  <li id="5fe6" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw jo jp jq"
+                    data-selectable-paragraph="">Publish Docker image with neural network</li>
+                  <li id="2eb6" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Share findings on false positives with Microsoft Team</li>
+                  <li id="8502" class="hj hk ar bz hl b hm jr ho js hq jt hs ju hu jv hw jo jp jq"
+                    data-selectable-paragraph="">Wrap the code into python package</li>
+                </ol>
+                <h1 id="6b73" class="ii ij ar bz by ik ds il du im in io ip iq ir is it" data-selectable-paragraph="">
+                  The awesomeness of videos captured</h1>
+                <p id="1c87" class="hj hk ar bz hl b hm iu ho iv hq iw hs ix hu iy hw dj" data-selectable-paragraph="">
+                  Here is a small bonus for readers who finished the reading :)</p>
+              </div>
+            </div>
+            <div class="gd">
+              <div class="n p">
+                <div class="ge gf gg gh gi gj ag gk ah gl aj ak">
+                  <div class="gn go gp gq gr n eq">
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ji r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_AUdngzS3mzvYoiJQuxk9Ew.gif"
+                                width="800" height="450" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="800" height="450" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_AUdngzS3mzvYoiJQuxk9Ew(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1600/1*AUdngzS3mzvYoiJQuxk9Ew.gif"
+                                width="800" height="450" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </figure>
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ji r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_ez-dbM8JF7H7yRsZLRTtjw.gif"
+                                width="800" height="450" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="800" height="450" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_ez-dbM8JF7H7yRsZLRTtjw(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1600/1*ez-dbM8JF7H7yRsZLRTtjw.gif"
+                                width="800" height="450" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </figure>
+                  </div>
+                  <div class="n eq">
+                    <figure class="je gd lc jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ld r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_EhX3BJ-EjCep2PfNUuaJnw.gif"
+                                width="600" height="338" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="600" height="338" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_EhX3BJ-EjCep2PfNUuaJnw(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1200/1*EhX3BJ-EjCep2PfNUuaJnw.gif"
+                                width="600" height="338" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </figure>
+                    <figure class="je gd le jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ji r">
+                            <div class="gx gy de t u gz ak ax ha hb"><img class="de t u gz ak hf hg bg rn"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_fH0IN0cESlvylz-rA7OT6A.gif"
+                                width="800" height="450" role="presentation"></div><img class="oi rh de t u gz ak hi"
+                              width="800" height="450" role="presentation"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1_fH0IN0cESlvylz-rA7OT6A(1).gif"><noscript><img
+                                class="de t u gz ak" src="https://miro.medium.com/max/1600/1*fH0IN0cESlvylz-rA7OT6A.gif"
+                                width="800" height="450" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </figure>
+                  </div>
+                  <div class="n eq">
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="gu gv en gw ak">
+                        <div class="hc r en hd">
+                          <div class="ic r">
+                            <div class="oi rh de t u gz ak ax ha hb"><img class="de t u gz ak hf hg hh"
+                                src="./Detecting animals in the backyard — practical application of deep learning._files/1_i8HcNUr2ArGvjQr7rJBftw.gif"
+                                width="600" height="340" role="presentation"></div><img class="gx gy de t u gz ak hi"
+                              width="600" height="340" role="presentation"><noscript><img class="de t u gz ak"
+                                src="https://miro.medium.com/max/1200/1*i8HcNUr2ArGvjQr7rJBftw.gif" width="600"
+                                height="340" role="presentation" /></noscript>
+                          </div>
+                        </div>
+                      </div>
+                    </figure>
+                    <figure class="je gd jf jg gt gs jh paragraph-image">
+                      <div class="hc r en hd">
+                        <div class="ic r">
+                          <div class="oi rh de t u gz ak ax ha hb"><img class="de t u gz ak hf hg hh"
+                              src="./Detecting animals in the backyard — practical application of deep learning._files/1__mvI406V5VuQ9n76C37zvw.gif"
+                              width="480" height="272" role="presentation"></div><img class="gx gy de t u gz ak hi"
+                            width="480" height="272" role="presentation"><noscript><img class="de t u gz ak"
+                              src="https://miro.medium.com/max/960/1*_mvI406V5VuQ9n76C37zvw.gif" width="480"
+                              height="272" role="presentation" /></noscript>
+                        </div>
+                      </div>
+                      <figcaption class="cd fb id ie if dc da db ig ih by fa jj en jk jl" data-selectable-paragraph="">
+                        Examples of spices captured and detected.</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+      <div class="oi di lf s ak ll lj lm" data-test-id="post-sidebar">
+        <div class="n p">
+          <div class="ac ae af ag ah ai aj ak">
+            <div class="ln n dd">
+              <div class="rm">
+                <div class="lo lp lq n">
+                  <div class="n o">
+                    <div class="lr r en"><a
+                        href="https://medium.com/m/signin?operation=register&amp;redirect=https%3A%2F%2Fmedium.com%2F%40gaiar%2Fdetecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8&amp;source=post_sidebar-----c030d3263ba8---------------------clap_sidebar-"
+                        class="bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx" rel="noopener">
+                        <div class="bp ls lt lu lv lw lx ly lz ma mb"><svg width="29" height="29">
+                            <g fill-rule="evenodd">
+                              <path
+                                d="M13.74 1l.76 2.97.76-2.97zM16.82 4.78l1.84-2.56-1.43-.47zM10.38 2.22l1.84 2.56-.41-3.03zM22.38 22.62a5.11 5.11 0 0 1-3.16 1.61l.49-.45c2.88-2.89 3.45-5.98 1.69-9.21l-1.1-1.94-.96-2.02c-.31-.67-.23-1.18.25-1.55a.84.84 0 0 1 .66-.16c.34.05.66.28.88.6l2.85 5.02c1.18 1.97 1.38 5.12-1.6 8.1M9.1 22.1l-5.02-5.02a1 1 0 0 1 .7-1.7 1 1 0 0 1 .72.3l2.6 2.6a.44.44 0 0 0 .63-.62L6.1 15.04l-1.75-1.75a1 1 0 1 1 1.41-1.41l4.15 4.15a.44.44 0 0 0 .63 0 .44.44 0 0 0 0-.62L6.4 11.26l-1.18-1.18a1 1 0 0 1 0-1.4 1.02 1.02 0 0 1 1.41 0l1.18 1.16L11.96 14a.44.44 0 0 0 .62 0 .44.44 0 0 0 0-.63L8.43 9.22a.99.99 0 0 1-.3-.7.99.99 0 0 1 .3-.7 1 1 0 0 1 1.41 0l7 6.98a.44.44 0 0 0 .7-.5l-1.35-2.85c-.31-.68-.23-1.19.25-1.56a.85.85 0 0 1 .66-.16c.34.06.66.28.88.6L20.63 15c1.57 2.88 1.07 5.54-1.55 8.16a5.62 5.62 0 0 1-5.06 1.65 9.35 9.35 0 0 1-4.93-2.72zM13 6.98l2.56 2.56c-.5.6-.56 1.41-.15 2.28l.26.56-4.25-4.25a.98.98 0 0 1-.12-.45 1 1 0 0 1 .29-.7 1.02 1.02 0 0 1 1.41 0zm8.89 2.06c-.38-.56-.9-.92-1.49-1.01a1.74 1.74 0 0 0-1.34.33c-.38.29-.61.65-.71 1.06a2.1 2.1 0 0 0-1.1-.56 1.78 1.78 0 0 0-.99.13l-2.64-2.64a1.88 1.88 0 0 0-2.65 0 1.86 1.86 0 0 0-.48.85 1.89 1.89 0 0 0-2.67-.01 1.87 1.87 0 0 0-.5.9c-.76-.75-2-.75-2.7-.04a1.88 1.88 0 0 0 0 2.66c-.3.12-.61.29-.87.55a1.88 1.88 0 0 0 0 2.66l.62.62a1.88 1.88 0 0 0-.9 3.16l5.01 5.02c1.6 1.6 3.52 2.64 5.4 2.96a7.16 7.16 0 0 0 1.18.1c1.03 0 2-.25 2.9-.7A5.9 5.9 0 0 0 23 23.24c3.34-3.34 3.08-6.93 1.74-9.17l-2.87-5.04z">
+                              </path>
+                            </g>
+                          </svg></div>
+                      </a></div>
+                    <div class="mc r">
+                      <div class="md">
+                        <h4 class="by fa fb ca cd"><button class="bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx">1
+                          </button></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div><a
+                  href="https://medium.com/m/signin?operation=register&amp;redirect=https%3A%2F%2Fmedium.com%2F%40gaiar%2Fdetecting-animals-in-the-backyard-practical-application-of-deep-learning-c030d3263ba8&amp;source=post_sidebar--------------------------bookmark_sidebar-"
+                  class="bi bj bk bl bm bn bo bp bq br bs bt bu bv bw bx" rel="noopener"><svg width="25" height="25"
+                    viewBox="0 0 25 25">
+                    <path
+                      d="M19 6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14.66h.01c.01.1.05.2.12.28a.5.5 0 0 0 .7.03l5.67-4.12 5.66 4.13a.5.5 0 0 0 .71-.03.5.5 0 0 0 .12-.29H19V6zm-6.84 9.97L7 19.64V6a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v13.64l-5.16-3.67a.49.49 0 0 0-.68 0z"
+                      fill-rule="evenodd"></path>
+                  </svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</body>
+
+</html>
