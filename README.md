@@ -13,4 +13,6 @@ sudo udevadm trigger
  udevadm info -a -p  $(udevadm info -q path -n /dev/video1)
 
 
- 
+```
+docker buildx build --platform linux/arm64 -t cat_expel:0.1 .
+```
