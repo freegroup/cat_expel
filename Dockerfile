@@ -48,11 +48,16 @@ RUN cd ~  && \
           -D BUILD_EXAMPLES=OFF ..  &&\
     make -j4 &&\
     make install &&\
+    cd ~ &&\
+    rm opencv.zip && \
+    rm opencv_contrib.zip && \
+    rm -r opencv && \
+    rm -r opencv_contrib && \
     ldconfig
 
 # Install helloworld
-COPY ./src/ /app
-COPY ./requirements.txt/ /app
+# COPY ./src/ /app
+# COPY ./requirements.txt/ /app
 
 
 # RUN pip install -r requirements.txt
