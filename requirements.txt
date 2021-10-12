@@ -1,5 +1,5 @@
 numpy==1.16.4
-opencv-python==4.1.0.25
+opencv-python==4.2.0.32
 six==1.12.0
 tqdm==4.32.2
 slackclient==2.1.0
